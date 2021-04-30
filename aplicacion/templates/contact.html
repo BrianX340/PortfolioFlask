@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Brian | Contacto{% endblock %}
+
+{% block body %}
+
+
+  </header>
+
+  <section id="contact">
+    <div class="box-contact-features">
+      <i class="fas fa-map-marker-alt fa-2x"></i>
+      <h4>Direccion</h4>
+      <p>Peru 1721, Presidente Derqui</p>
+      <p>Buenos Aires, Argentina</p>
+    </div>
+    <div class="box-contact-features">
+      <i class="fas fa-mobile-alt fa-2x"></i>
+      <h4>Telefono</h4>
+      <p>Celular: +54 11 3448 9022</p>
+      <p>Fijo: +54 11 2081 9433</p>
+    </div>
+    <div class="box-contact-features">
+      <i class="fas fa-envelope fa-2x"></i>
+      <h4>Email</h4>
+      <a href="mailto:brianx340@gmail.com">brianx340@gmail.com</a>
+    </div>
+    <div class="features-contact">
+      <div class="box-form">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15642.071138041963!2d-58.82698433716224!3d-34.49425389447527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc99634d7525c7%3A0x11339b462783a19a!2sPer%C3%BA%201721%2C%20B1635BTI%20Pres.%20Derqui%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1619574565757!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="box-form">
+        <div id="contact-form">
+          <div class="single-form">
+            <input type="text" value="Nombre">
+          </div>
+          <div class="single-form">
+            <input type="email" value="Correo Electronico">
+          </div>
+          <div class="single-form">
+            <textarea name="message" id="" cols="30" rows="10">Mensaje...</textarea>
+          </div>
+          <div class="single-form">
+            <button class="btn btn-dark">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+{% endblock %}

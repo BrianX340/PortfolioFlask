@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Brian | Habilidades{% endblock %}
+
+{% block body %}
+<style>
+  #showcase {
+    height: 20vh;
+    padding: 0%;
+  }
+
+  #showcase #err {
+    padding-top: 0px;
+  }
+</style>
+
+    <div id="showcase">
+      <div class="showcase-banner" id="err">
+        <h1 class="subpage">Habilidades</h1>
+        <p class="large">Aqui dejare una lista con las tecnologias que estoy familiarizado...</p>
+      </div>
+    </div>
+
+  </header>
+
+  <section class="single-project">
+    <div class="container">
+      <div class="box-portfolio">
+        <h4>Librerias de Python</h4>
+        <ul>
+          <li>Pandas</li>
+          <li>Numpy</li>
+          <li>WxPython</li>
+          <li>TkInter</li>
+        </ul>
+      </div>
+      
+      <div class="box-portfolio">
+        <h4>Frameworks Python</h4>
+        <ul>
+          <li>Flask (intermedio)</li>
+          <li>Django (basico)</li>
+        </ul>
+      </div>
+
+      <div class="box-portfolio">
+        <p>Vea mas <a href="{{ url_for('html_css') }}" class="texto-en-enlace">aqui.</a></p>
+      </div>
+
+      <div class="box-portfolio">
+        <h4>Otras Tecnologias</h4>
+        <ul>
+          <li>Linux y terminal</li>
+          <li>Unity (basico)</li>
+          <li>JupyterNotebook</li>
+          <li>Photoshop (Hobby)</li>
+          <li>Paquete Office</li>
+        </ul>
+      </div>
+      
+  
+    </div>
+  <hr>
+
+{% endblock %}

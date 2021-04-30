@@ -1,0 +1,37 @@
+{% extends "blog-layout.html" %}
+
+{% block title %}Blog | Login{% endblock %}
+
+{% block enlace %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+{% block navbar %}
+<ul>
+    <li><a href="{{ url_for('blog_loged') }}">Inicio</a></li>
+    <li><a href="{{ url_for('blog_agregar') }}">Agregar un post!</a></li>
+    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+
+
+{% for post in posts %}
+
+<section>
+	
+	<h3 class="post-title">{{ post.titulo }}</h3>
+
+	<p class="date">Publicado en: {{ post.fecha.strftime('%m/%d/%Y') }}</p>
+	<p>{{ post.texto }}</p>
+
+	<form class="delete-button" action="{{ url_for('borrar_post') }}" method="post">
+		<button value="{{post.id}}" name="post_id">Borrar Post</button>
+	</form>
+	
+
+</section>
+
+{% endfor %}
+
+
+{% endblock %}

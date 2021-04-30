@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/whatsappbutton.css') }}">
+  <link rel="stylesheet" media="screen and (max-width: 768px)" href="{{ url_for('static', filename='css/mobile.css') }}">
+  <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='files/icon.ico') }}">
+  {% block enlace %}{% endblock %}
+  <title>{% block title %}Portfolio Brian | Bienvenido!{% endblock %}</title>
+</head>
+<body>
+  	<a href="https://wa.me/+541134489022?text=Hola%20desarrollador%20revise%20tu%20sitio%21%21" class="btn-wsp" target="_blank">
+	    <i class="fa fa-whatsapp icono"></i>
+	  </a>
+  {% block header %}
+  <header>
+    <nav id="navbar">
+      <div class="container">
+        <h1 class="logo"><a href="{{ url_for('index') }}">Rodriguez Brian</a></h1>
+        <ul id="main-nav" class="txt-btn">
+          <li><a class="current" href="{{ url_for('index') }}">Portafolio</a></li>
+          <li><a href="{{ url_for('contact') }}">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+    {% endblock %}
+{% block body %}
+
+{% endblock %}
+
+  <footer id="main-footer">
+    <div class="container">
+      <p class="small">Brian Rodriguez 2021 :) &copy;</p>
+      <!-- <div class="social"> -->
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+      <!-- </div> -->
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Brian | Principal{% endblock %}
+
+{% block body %}
+<div id="showcase-home">
+    <div class="showcase-banner">
+      <h1 class="subpage">Bienvenidos</h1>
+      <p class="large">Este es un portafolio para que puedan ver mi trabajo, el sitio esta echo solo con HTML y CSS con Framework Flask</p>
+    </div>
+  </div>
+
+</header>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="portfolio-nav">
+      <ul class="txt-btn">
+        <li><a href="{{ url_for('habilidades') }}">Habilidades</a></li>
+        <li><a href="{{ url_for('cursos') }}">Cursos Realizados</a></li>
+        <li><a href="{{ url_for('acerca_de_mi') }}">Acerca de mi</a></li>
+        <li><a href="{{ url_for('cv') }}">Curriculum PDF</a></li>
+      </ul>
+    </div>
+    <div class="portfolio-content">
+      <div class="box">
+        <a href="{{ url_for('html_css') }}">
+          <img src="{{ url_for('static', filename='img/index/1-html-css.png') }}" alt="">
+        </a>
+      </div>
+      <div class="box">
+        <a href="{{ url_for('blog_login') }}">
+          <img src="{{ url_for('static', filename='img/index/2-blog.png') }}" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+{% endblock %}

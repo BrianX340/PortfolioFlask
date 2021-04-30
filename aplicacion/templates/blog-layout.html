@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Blog | Blog{% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_blog.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/whatsappbutton.css') }}">
+	<script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+	{% block enlace %}{% endblock %}
+</head>
+<body>
+	<header class="main-head">
+		<nav>
+			<h1 id="logo"><a href="{{ url_for('index') }}">Volver a Portfolio</a></h1>
+			{% block navbar %}{% endblock %}
+			
+		</nav>
+	</header>
+	<a href="https://wa.me/+541134489022?text=Hola%20desarrollador%20revise%20tu%20sitio%21%21" class="btn-wsp" target="_blank">
+		<i class="fa fa-whatsapp icono"></i>
+	</a>
+	{% block body %}
+	{% endblock %}
+</body>
+</html>

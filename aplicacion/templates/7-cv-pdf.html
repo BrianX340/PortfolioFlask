@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Brian | Habilidades{% endblock %}
+
+{% block body %}
+  </header>
+  <style>
+    .pdf embed{
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+
+  <section class="pdf">
+    <embed src="{{ url_for('static', filename='files/CV.pdf') }}" type="application/pdf" width="100%" height="600px" />
+  </section>
+
+  <hr>
+{% endblock %}

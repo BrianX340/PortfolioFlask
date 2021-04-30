@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Brian | Carrusel{% endblock %}
+
+{% block enlace %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/carrusel.css') }}">
+{% endblock %}
+
+
+{% block body %}
+      <section class="container gral">
+    <div id="showcase" class="elcarrusel">
+      <section class="container">
+        <div id="carousel" style="transform: translateZ(-288px) rotateY(-360deg);">
+          <figure><img src="{{ url_for('static', filename='img/index/1-html-css.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/index/2-unity.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/carrusel/5-github.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/carrusel/6-python.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/carrusel/7-javascript.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/carrusel/8-jupyter.png') }}" alt=""></figure>
+          <figure><img src="{{ url_for('static', filename='img/carrusel/9-linux.png') }}" alt=""></figure>
+         </div>
+     </section>
+    </div>
+
+  </header>
+
+  <section class="single-project">
+    <div class="container" id="bajocarrusel">
+      <div class="box-portfolio">
+        <h4>HTML y CSS</h4>
+        <p>En las imagenes estan las tecnologias que manejo.</p>
+        <p>Puede ver mas <a href="{{ url_for('habilidades') }}" class="texto-en-enlace">aqui.</a></p>
+      
+    </div>
+
+  </section>
+
+  <hr>
+
+
+{% endblock %}
