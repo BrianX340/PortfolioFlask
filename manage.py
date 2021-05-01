@@ -3,7 +3,9 @@ from aplicacion.main import app, db
 from aplicacion.models import *
 
 manager = Manager(app)
-app.config['DEBUG'] = True # Ensure debugger will load.
+app.config['DEBUG'] = True
+
+
 
 @manager.command
 def create_tables():

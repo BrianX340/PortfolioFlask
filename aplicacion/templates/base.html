@@ -7,14 +7,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/whatsappbutton.css') }}">
-  <link rel="stylesheet" media="screen and (max-width: 768px)" href="{{ url_for('static', filename='css/mobile.css') }}">
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
   <link rel="shortcut icon" href="{{ url_for('static', filename='files/icon.ico') }}">
   {% block enlace %}{% endblock %}
   <title>{% block title %}Portfolio Brian | Bienvenido!{% endblock %}</title>
 </head>
 <body>
-  	<a href="https://wa.me/+541134489022?text=Hola%20desarrollador%20revise%20tu%20sitio%21%21" class="btn-wsp" target="_blank">
+  	<a href="https://wa.me/+541134489022?text=Hola%20desarrollador%20revise%20tu%20sitio%21%21" class="btn-wsp" id="btn-wsp" target="_blank">
 	    <i class="fa fa-whatsapp icono"></i>
 	  </a>
   {% block header %}
