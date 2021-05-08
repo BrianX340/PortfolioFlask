@@ -109,6 +109,7 @@ hr {
 }
 
 #navbar .logo{
+  text-align: center;
   float: left;
   padding-top: 20px;
 }
@@ -134,6 +135,11 @@ hr {
 
 #navbar ul li a.current {
   color: black;
+}
+
+#navbar .container {
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -379,3 +385,5 @@ hr {
 .texto-en-enlace:hover {
   color: red;
 }
+
+

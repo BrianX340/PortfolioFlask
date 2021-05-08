@@ -1,0 +1,24 @@
+{% extends "blog-layout.html" %}
+
+{% block title %}Blog | Login{% endblock %}
+
+{% block enlace %}  <link rel="stylesheet" href="{{ url_for('static', filename='') }}">
+{% endblock %}
+{% block navbar %}
+<ul>
+    <li><a href="{{ url_for('blog_login') }}">Login</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+
+
+<section>
+
+    <h1>El email {{ email }} se ha registrado correctamente</h1>
+
+</section>
+
+
+
+{% endblock %}

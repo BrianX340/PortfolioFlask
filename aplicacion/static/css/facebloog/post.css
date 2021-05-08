@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+
+.cards {
+    margin-left: 12px;
+    padding-top: 15px;
+    
+}
+
+
+.cards .card {
+    border: black 1px solid;
+    word-wrap: break-word;
+    margin: auto;
+    min-width: 430px;
+    max-width: fit-content;
+    height: auto;
+    padding: 10px;
+    background: linear-gradient(to bottom, rgb(167 65 65) 0%, rgb(253 118 124) 100%);
+    box-shadow: 0 2px 2px 0 #eeeeee40;
+    border-radius: 10px;
+    box-shadow: 0px 16px 15px -10px rgba(105, 96, 215, 0.0944602);
+    margin-bottom: 10px;
+}
+
+.cards .card div {
+    display: inline-flex;
+    width: 100%;
+}
+
+
+.cards .card h4 {
+    margin: auto;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    color: #2B2862;
+}
+
+.cards .card div h4 {
+    margin-right: 15px;
+}
+
+.cards .card p {
+    min-height: 26px;
+    padding: 10px;
+    text-align: initial;
+    margin: auto 15px;
+    margin-top: 15px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    background: linear-gradient(to bottom, rgb(255 254 254 / 23%) 0%, rgb(255 255 255 / 85%) 100%);
+
+}
+
+.cards .card div p {
+    margin: auto 15px;
+    width: 90%;
+}
+
+.delete-button button {
+    text-align: right;
+    margin-right: 15px;
+    margin: 0 0 0 80%;
+}
+
+#header_wrapper #header {
+    display: flex;
+}
+
+#header .post-header {
+    width: 50%;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+}
+
+#header .post-header li {
+    margin: auto;
+}
+
+
+#header .post-header a:-webkit-any-link{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.posteo .card .login-form textarea {
+    width: 95%;
+    height: 40px;
+    resize: none;
+    font-size: 20px;
+    padding: 10px;
+    outline: none;
+}
+
+.login-form input {
+    margin: 0 0 0 80%;
+}
+
+
+.posteo .card div {
+    margin-bottom: 10px;
+}
+
+.posteo .card div p {
+    font-size: 15px;
+    background: none;
+}

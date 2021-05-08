@@ -1,5 +1,6 @@
 /* Boton Whatsapp */
 .btn-wsp{
+    display: flex;
     position:fixed;
     width:60px;
     height:60px;
@@ -29,6 +30,9 @@
   } 
   */
 
-.fa, .fa-whatsapp, .icono {
-  vertical-align: top;
+
+.btn-wsp i {
+  width: 100%;
+  height: 100%;
+  padding: 18%;
 }

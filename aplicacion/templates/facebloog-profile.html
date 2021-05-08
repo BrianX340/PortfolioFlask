@@ -1,0 +1,16 @@
+{% extends "facebloog-base.html" %}
+
+{% block enlace %}  <link rel="stylesheet" href="{{ url_for('static', filename='css/facebloog/profile.css') }}">  {% endblock %}
+
+
+{% block header %}
+<ul class="post-header">
+    <li><a href="{{ url_for('facebloog') }}">Inicio</a></li>
+    <li><a href="{{ url_for('facebloog_logout') }}">Logout</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}

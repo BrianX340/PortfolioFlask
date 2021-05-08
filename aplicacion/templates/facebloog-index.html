@@ -1,0 +1,38 @@
+{% extends "facebloog-base.html" %}
+
+{% block header %}
+<form class="register-form" action="{{ url_for('verificar_usuario_facebloog') }}" method="post">
+    <li>Email o Numero Movil<br><input type="text" name="email_login"></li>
+    <li>Clave<br><input type="password" name="password_login"><br><a href="">Olviste la cuenta?</a></li>
+    <li><input type="submit" name="login" value="Log In"></li>
+</form>
+{% endblock %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <div id="div1">
+        <img id='imgg' src="{{ url_for('static', filename='img/logo_login.png') }}">
+    </div>
+
+    <div id="div2">
+        <h1>Crear una cuenta</h1>
+        <p>Es gratis no te preocupes.</p>
+        <form class="register-form" action="{{ url_for('registrar_usuario_facebloog') }}" method="post">
+            <li><input name="name" type="text" placeholder="Nombre" id="firstname"></li>
+            <li><input name="lastname" type="text" placeholder="Apellido" id="surname"></li>
+            <li><input name="emailregister" type="text" placeholder="Numero movil o Email" id="email"></li>
+            <li><input name="passwordregister" type="password" placeholder="Clave"></li>
+            <li><input name="passwordconfirm" type="password" placeholder="Confirme clave"></li>
+
+            <li id="terms">Al presionar en crear cuenta usted acepta <a href="">Terminos y condiciones</a> y tambien <br>you have
+                read our <a href="">Politica de datos</a>, incluyendo <a href="">uso de Cookies</a>.</li>
+            <li><input type="submit" value="Crear Cuenta!" id="result"></li>
+            <li id="create_page"><a href="">Crear cuenta</a> para celebridades, bandas o empresas.</li>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
