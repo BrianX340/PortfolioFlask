@@ -38,19 +38,25 @@ def acerca_de_mi():
 def cv():
 	return render_template('7-cv-pdf.html')
 
-################################################################   FaceBloog  ################################################################
 
+################################################################   FaceBloog  ################################################################
 
 @app.route("/facebloog")
 def facebloog():
 	from aplicacion.models import Post
+	from aplicacion.models import Comments
 	from aplicacion.login import getEmailUser
 	from aplicacion.login import is_login
 	
 
 	if is_login():
 		posts = Post.query.filter_by(email=getEmailUser()).order_by(Post.fecha.desc()).all()
-		return render_template('facebloog-inicio.html', posts=posts)
+		comments = []
+		for post in posts:
+			comment = Comments.query.filter_by(post_id=post.id).order_by(Comments.created.desc()).all()
+			comments.append(comment)
+
+		return render_template('facebloog-inicio.html', posts=posts,comments=comments)
 	else:
 		return render_template('facebloog-index.html')
 
@@ -101,9 +107,6 @@ def verificar_usuario_facebloog():
 		return redirect('facebloog')
 	return render_template('facebloog-loginfailed.html', email=email)
 
-
-
-
 @app.route("/crear-facebloogpost", methods=["POST"])
 def crear_facebloogpost():
 	from aplicacion.models import User
@@ -113,10 +116,29 @@ def crear_facebloogpost():
 
 	if is_login():
 		email = getEmailUser()
-		user = User.query.get(email)
+		user = User.query.filter_by(email=email).first()
 		texto = request.form.get("texto")
-		post = Post(texto=texto, email=email)
+		post = Post(texto=texto, email=user.email)
 		db.session.add(post)
+		db.session.commit()
+		return redirect("/facebloog")
+
+@app.route("/crear-facebloogcomments", methods=["POST"])
+def crear_facebloogcomments():
+	from aplicacion.models import User
+	from aplicacion.models import Post
+	from aplicacion.models import Comments
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+
+	if is_login():
+		email = getEmailUser()
+		user = User.query.filter_by(email=email).first()
+		post_id = request.form.get("post_id")
+		posts = Post.query.filter_by(id=post_id).first()
+		texto = request.form.get("texto")
+		comentario = Comments(content=texto, email_id=user.email, post_id=posts.id)
+		db.session.add(comentario)
 		db.session.commit()
 		return redirect("/facebloog")
 

@@ -26,8 +26,8 @@
             <div class="card">
                 <div><p>¿En que estas pensando?</p></div>
                 <form class="login-form" action="{{ url_for('crear_facebloogpost') }}" method="post">
-                    <textarea name="texto" cols="30" rows="10"></textarea>
-                    <input type="submit" name="submit">
+                    <textarea maxlength="150" name="texto" cols="30" rows="10"></textarea>
+                    <input type="submit" name="submit" value="Publicar">
                 </form>
             </div>
 
@@ -36,14 +36,22 @@
     <div class="cards">
         {% for post in posts %}
         <div class="card">
-            <div><h4>{{ post.fecha.strftime('%m/%d/%Y') }}</h4></div>
+            <div><h4>{{ post.fecha.strftime('%m/%d/%Y') }}</h4>
+                <form class="delete-button" id= "delete-button" action="{{ url_for('borrar_facebloogpost') }}" method="post">
+                    <button value="{{post.id}}" name="post_id">X</button>
+                </form>
+            </div>
             <p>{{ post.texto }}</p>
-            <form class="delete-button" id= "delete-button" action="{{ url_for('borrar_facebloogpost') }}" method="post">
-                <button value="{{post.id}}" name="post_id">Borrar Post</button>
+            <form class="comment-form" id= "comment-button" action="{{ url_for('crear_facebloogcomments') }}" method="post">
+                <textarea maxlength="150" name="texto" cols="30" rows="10"></textarea>
+                <button value="{{post.id}}" name="post_id">Comentar</button>
             </form>
         </div>
         {% endfor %}
     </div>
+
+
+    
 </section>
 
 {% endblock %}

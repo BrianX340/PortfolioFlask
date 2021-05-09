@@ -10,14 +10,16 @@ import hashlib
 
 class Post(db.Model):
 	"""Post"""
-	__tablename__ = "Post"
+	__tablename__ = "post"
 	id = Column(Integer, primary_key=True)
-	email = Column(Integer, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
+	email = Column(String, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
 	fecha = Column(DateTime, default=datetime.now)
 	texto = Column(String, nullable=False)
 
 	def __repr__(self):
 	    return f'<Post by user_id: {self.email}>'
+
+
 
 class User(db.Model):
 	"""User"""
@@ -47,6 +49,27 @@ class User(db.Model):
 		if not self.id:
 			db.session.add(self)
 		db.session.commit()
+
+
+class Comments(db.Model):
+	__tablename__ = "comments"
+	id = Column(Integer, primary_key=True)
+	email_id = Column(String, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
+	post_id = Column(String, ForeignKey('post.id', ondelete='SET NULL'))
+	created = Column(DateTime, default=datetime.utcnow)
+	content = Column(Text)
+
+	@staticmethod
+	def get_by_post_id(post_id):
+		return Comments.query.filter_by(post_id=post_id).all()
+	
+	@staticmethod
+	def get_by_user_id(post_id):
+		return Comments.query.filter_by(email_id=email_id).all()
+
+	def __repr__(self):
+	    return f'<Comment by {self.email_id} in post {self.post_id}>'
+
 	"""
 	@staticmethod
 	def get_by_id(id):
@@ -72,24 +95,7 @@ class FacebloogPost(db.Model):
 	
 	comments = db.relationship('FacebloogComments', backref='post', lazy=True, cascade='all, delete-orphan', order_by='asc(FacebloogComments.created)')
 
-class FacebloogComments(db.Model):
-	__tablename__ = "comments"
 
-	id = Column(Integer, primary_key=True)
-	user_id = Column(Integer, ForeignKey('user.id', ondelete='SET NULL'))
-	user_name = Column(String)
-	post_id = Column(Integer, ForeignKey('post.id'), nullable=False)
-	created = Column(DateTime, default=datetime.utcnow)
-	
-	content = Column(Text)
-
-	@staticmethod
-	def get_by_post_id(post_id):
-		return FacebloogComments.query.filter_by(post_id=post_id).all()
-	
-	@staticmethod
-	def get_by_user_id(post_id):
-		return FacebloogComments.query.filter_by(user_id=user_id).all()
 	
 #compmgmt para acceder a las cuentas de usuario
 
