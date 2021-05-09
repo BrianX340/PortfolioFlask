@@ -1,42 +1,44 @@
-from sqlalchemy import Table, Column, Integer, ForeignKey, Boolean
-from sqlalchemy import DateTime, Integer, String, Text, Float
-
+from sqlalchemy import Table, Column, Integer, ForeignKey, Boolean, DateTime, String, Text, Float
 from sqlalchemy.orm import relationship, backref
 from aplicacion.main import db
 from datetime import datetime
+import hashlib
 
+
+
+################################################################   FaceBloog  ################################################################
 
 class Post(db.Model):
-	"post"
+	"""Post"""
 	__tablename__ = "Post"
 	id = Column(Integer, primary_key=True)
-	user_id = Column(Integer, ForeignKey('facebloog_user.id', ondelete='SET NULL'))
-	id_link = Column(String, nullable=False)
+	email = Column(Integer, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
 	fecha = Column(DateTime, default=datetime.now)
 	texto = Column(String, nullable=False)
 
-class User(db.Model):
-	"User"
-	__tablename__ = 'facebloog_user'
-	#__table_args__ = {'extend_existing': True}
-	id = Column(Integer, primary_key=True)
+	def __repr__(self):
+	    return f'<Post by user_id: {self.email}>'
 
+class User(db.Model):
+	"""User"""
+	__tablename__ = 'facebloog_user'
+	email = Column(String, primary_key=True, nullable=False)
 	name = Column(String, nullable=False)
 	lastname = Column(String, nullable=False)
-
-	email = Column(String, nullable=False)
 	#phone = Column(String, nullable=False)
-	password_hash = Column(String(128),nullable=False)
+	password = Column(String(128),nullable=False)
+	
+	def setPassword(self,clave):
+		clave = hashlib.new("sha1", clave.encode("utf-8"))
+		self.password = clave.hexdigest()
 
-	#def __repr__(self):
-	#    return f'<User {self.email}>'
-
-
-	#def __repr__(self):
-	#	return (u'<{self.__class__.__name__}: {self.id}>'.format(self=self))
+	def __repr__(self):
+	    return f'<User {self.email}>'
 
 	def verify_password(self, password):
-		if self.password_hash == password:
+		password = hashlib.new("sha1", password.encode("utf-8"))
+
+		if self.password == password.hexdigest():
 			return True
 		else:
 			return False
@@ -45,7 +47,7 @@ class User(db.Model):
 		if not self.id:
 			db.session.add(self)
 		db.session.commit()
-
+	"""
 	@staticmethod
 	def get_by_id(id):
 		return User.query.get(id)
@@ -53,71 +55,7 @@ class User(db.Model):
 	@staticmethod
 	def get_by_email(email):
 		return User.query.filter_by(email=email).first()
-
-
-################################################################   FaceBloog  ################################################################
-
-
-
-"""
-
-class Wall(db.Model):
-	"Muro"
-	__tablename__ = "muro"
-	id = Column(Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('facebloog_usuarios.id'),nullable=False)
-
-
-
-class FacebloogPost(db.Model):
-	"Publicaciones"
-	__tablename__ = "publicacion"
-	id = Column(Integer, primary_key=True)
-	id_link = Column(String, nullable=False)
-	titulo = Column(String, nullable=False)
-	fecha = Column(DateTime, default=datetime.now)
-	texto = Column(String, nullable=False)
-
-
-
-class FacebloogUser(db.Model):
-	"Usuarios"
-	__tablename__ = 'facebloog_usuarios'
-	id = Column(Integer, primary_key=True)
-
-	wall = relationship("muro", lazy=True, backref='facebloog_usuarios')
-
-	name = Column(String, nullable=False)
-	lastname = Column(String, nullable=False)
-
-	email = Column(String, nullable=False)
-	phone = Column(String, nullable=False)
-	password_hash = Column(String(128),nullable=False)
-
-
-	def __repr__(self):
-		return (u'<{self.__class__.__name__}: {self.id}>'.format(self=self))
-
-	def verify_password(self, password):
-		if self.password_hash == password:
-			return True
-		else:
-			return False
-
-
-class Person(db.Model):
-	id = db.Column(Integer, primary_key=True)
-	name = db.Column(String(50), nullable=False)
-	wall = relationship('Wall', lazy='select',
-		backref=db.backref('person', lazy='joined'))
-
-class Wall(db.Model):
-	id = Column(Integer, primary_key=True)
-	email = Column(String(120), nullable=False)
-	person_id = Column(Integer, ForeignKey('person.id'),
-		nullable=False)
-"""
-
+	"""
 
 """
 class FacebloogPost(db.Model):
@@ -153,11 +91,6 @@ class FacebloogComments(db.Model):
 	def get_by_user_id(post_id):
 		return FacebloogComments.query.filter_by(user_id=user_id).all()
 	
-
-
-
-
-
 #compmgmt para acceder a las cuentas de usuario
 
 

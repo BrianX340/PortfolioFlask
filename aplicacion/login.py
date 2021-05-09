@@ -1,15 +1,13 @@
 from flask import session, redirect
 
 def login_user(Usuario):
-    session["id"]=Usuario.id
     session["email"]=Usuario.email
 
 def logout_user():
-    session.pop("id",None)
     session.pop("email",None)
 
 def is_login():
-	if "id" in session:
+	if "email" in session:
 		return True
 	else:
 		return False	
@@ -17,8 +15,8 @@ def is_login():
 def is_admin():
 	return session.get("admin",False) 
 
-def getUserName():
-	if "id" in session:
+def getEmailUser():
+	if "email" in session:
 		return session["email"]
 	else:
 		return False

@@ -1,16 +1,14 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from aplicacion.forms import LoginForm
+
 import hashlib
-
-
 
 app = Flask(__name__)
 app.config.from_object('aplicacion.config')
 app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 db = SQLAlchemy(app)
 
-
+################################################################   Principal  ################################################################
 
 @app.route("/")
 def index():
@@ -40,36 +38,30 @@ def acerca_de_mi():
 def cv():
 	return render_template('7-cv-pdf.html')
 
-
-"""
-#app.run(debug=True,host='192.168.0.5', port=5000,threaded=True)
-app.run(debug=True,host='192.168.0.5', port=5000,threaded=True)
-"""
-
-
 ################################################################   FaceBloog  ################################################################
 
 
 @app.route("/facebloog")
 def facebloog():
-	from aplicacion.login import is_login
 	from aplicacion.models import Post
-	from aplicacion.login import getUserName
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
 	
+
 	if is_login():
-		posts = Post.query.filter_by(id_link=getUserName()).order_by(Post.fecha.desc()).all() # select * from post order by time
+		posts = Post.query.filter_by(email=getEmailUser()).order_by(Post.fecha.desc()).all()
 		return render_template('facebloog-inicio.html', posts=posts)
 	else:
 		return render_template('facebloog-index.html')
 
 @app.route("/facebloog-perfil")
 def facebloog_perfil():
+	from aplicacion.login import getEmailUser
 	from aplicacion.models import User
-	from aplicacion.login import getUserName
-	email = getUserName()
-	if getUserName():
-		user_email = getUserName()
-		user = db.session.query(User).filter(User.email==user_email).first()
+
+	user = getEmailUser()
+	if user:
+		user = User.query.get(user)
 		return render_template('facebloog-profile.html', email = user.email, name=user.name,lastname=user.lastname)
 	else:
 		return redirect('facebloog')
@@ -82,15 +74,13 @@ def registrar_usuario_facebloog():
 	apellido = request.form.get("lastname")
 	email = request.form.get("emailregister")
 	clave = request.form.get("passwordregister")
-	clave_hash = hashlib.new("sha1", clave.encode("utf-8"))
-
-	print(nombre,apellido,email,clave)
-
-	user_email = User.get_by_email(email)
+	user_email = User.query.filter_by(email=email).first()
+	
 	if user_email is not None:
 		return render_template('facebloog-mensaje.html', email=email)
 	else:
-		userProfile = User(name=nombre, lastname=apellido, email=email, password_hash=clave_hash.hexdigest())
+		userProfile = User(name=nombre, lastname=apellido, email=email)
+		userProfile.setPassword(clave)
 		db.session.add(userProfile)
 		db.session.commit()
 		return render_template('facebloog-registroexitoso.html', email=email)
@@ -99,20 +89,16 @@ def registrar_usuario_facebloog():
 def verificar_usuario_facebloog():
 	from aplicacion.models import User
 	from aplicacion.login import login_user
-	import hashlib
+	from aplicacion.forms import LoginForm
 
 	form = LoginForm()
-
 	email = request.form.get("email_login")
 	clave = request.form.get("password_login")
-	clave_hash = hashlib.new("sha1", clave.encode("utf-8"))
-
 	user = User.query.filter_by(email=email).first()
-
-	if user.password_hash == clave_hash.hexdigest():
+	correcto = user.verify_password(clave)
+	if correcto:
 		login_user(user)
 		return redirect('facebloog')
-	
 	return render_template('facebloog-loginfailed.html', email=email)
 
 
@@ -120,14 +106,16 @@ def verificar_usuario_facebloog():
 
 @app.route("/crear-facebloogpost", methods=["POST"])
 def crear_facebloogpost():
+	from aplicacion.models import User
 	from aplicacion.models import Post
+	from aplicacion.login import getEmailUser
 	from aplicacion.login import is_login
-	from aplicacion.login import getUserName
 
 	if is_login():
-		id_user = getUserName()
+		email = getEmailUser()
+		user = User.query.get(email)
 		texto = request.form.get("texto")
-		post = Post(id_link=id_user, texto=texto)
+		post = Post(texto=texto, email=email)
 		db.session.add(post)
 		db.session.commit()
 		return redirect("/facebloog")
@@ -135,6 +123,7 @@ def crear_facebloogpost():
 @app.route("/borrar-facebloogpost", methods=["POST"])
 def borrar_facebloogpost():
 	from aplicacion.models import Post
+
 	post_id = request.form.get("post_id")
 	post = db.session.query(Post).filter(Post.id==post_id).first()
 	db.session.delete(post)
