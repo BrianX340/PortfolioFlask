@@ -8,18 +8,6 @@ import hashlib
 
 ################################################################   FaceBloog  ################################################################
 
-class Post(db.Model):
-	"""Post"""
-	__tablename__ = "post"
-	id = Column(Integer, primary_key=True)
-	email = Column(String, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
-	fecha = Column(DateTime, default=datetime.now)
-	texto = Column(String, nullable=False)
-
-	def __repr__(self):
-	    return f'<Post by user_id: {self.email}>'
-
-
 
 class User(db.Model):
 	"""User"""
@@ -50,6 +38,19 @@ class User(db.Model):
 			db.session.add(self)
 		db.session.commit()
 
+class Post(db.Model):
+	"""Post"""
+	__tablename__ = "post"
+	id = Column(Integer, primary_key=True)
+	email = Column(String, ForeignKey('facebloog_user.email', ondelete='SET NULL'))
+	fecha = Column(DateTime, default=datetime.now)
+	texto = Column(String, nullable=False)
+
+	def __repr__(self):
+	    return f'<Post by user_id: {self.email}>'
+
+	def getContent(self):
+		return self.texto
 
 class Comments(db.Model):
 	__tablename__ = "comments"
@@ -64,11 +65,17 @@ class Comments(db.Model):
 		return Comments.query.filter_by(post_id=post_id).all()
 	
 	@staticmethod
-	def get_by_user_id(post_id):
-		return Comments.query.filter_by(email_id=email_id).all()
+	def get_by_user_id(self):
+		return Comments.query.filter_by(email_id=self.email_id).all()
 
 	def __repr__(self):
 	    return f'<Comment by {self.email_id} in post {self.post_id}>'
+
+	def getTime(self):
+	    return self.created.strftime('%m/%d/%Y')
+
+	def getContent(self):
+		return self.content
 
 	"""
 	@staticmethod

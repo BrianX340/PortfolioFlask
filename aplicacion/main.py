@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 
 import hashlib
@@ -7,6 +7,174 @@ app = Flask(__name__)
 app.config.from_object('aplicacion.config')
 app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 db = SQLAlchemy(app)
+
+
+################################################################   Comunicacion JS y Python  ################################################################
+
+
+@app.route("/crear-facebloogpost", methods=["POST"])
+def crear_facebloogpost():
+	from aplicacion.models import User
+	from aplicacion.models import Post
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+
+	req = request.get_json()
+
+	mensaje = str(req['message'])
+
+	if is_login():
+		email = getEmailUser()
+		user = User.query.filter_by(email=email).first()
+		texto = mensaje
+		post = Post(texto=texto, email=user.email)
+		db.session.add(post)
+		db.session.commit()
+		res = make_response(jsonify({"message": "OK"}), 200)
+		return res
+
+@app.route("/crear-facebloogcomments", methods=["POST"])
+def crear_facebloogcomments():
+	from aplicacion.models import User
+	from aplicacion.models import Post
+	from aplicacion.models import Comments
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+	req = request.get_json()
+	post_id = str(req['idpost'])
+	texto = str(req['texto'])
+	print(post_id,texto)
+
+	if is_login():
+		email = getEmailUser()
+		user = User.query.filter_by(email=email).first()
+		posts = Post.query.filter_by(id=post_id).first()
+		comentario = Comments(content=texto, email_id=user.email, post_id=posts.id)
+		db.session.add(comentario)
+		db.session.commit()
+		res = make_response(jsonify({"message": "OK"}), 200)
+		return res
+
+
+
+"""
+@app.route("/facebloog")
+def facebloog():
+	from aplicacion.models import Post
+	from aplicacion.models import Comments
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+	
+
+	if is_login():
+		email = getEmailUser()
+		posts = Post.query.filter_by(email=email).order_by(Post.fecha.desc()).all()
+		comments = []
+		for post in posts:
+			comment = Comments.query.filter_by(post_id=post.id).order_by(Comments.created.desc()).all()
+			if len(comment) > 0:
+				comments.append(comment)
+		print(comments)
+		return render_template('facebloog-inicio.html', posts=posts,comments=comments,user=email)
+	else:
+		return render_template('facebloog-index.html')
+"""
+
+@app.route("/consulta-posteos", methods=["POST"])
+def consulta_posteos():
+	from aplicacion.models import Post
+	from aplicacion.models import Comments
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+
+	req = request.get_json()
+
+
+	if is_login():
+		email = getEmailUser()
+		posts = Post.query.filter_by(email=email).order_by(Post.fecha.desc()).all()
+
+		posteos = {}
+		for post in posts:
+
+			lista_comentarios = Comments.query.filter_by(post_id=post.id).order_by(Comments.created.desc()).all()
+			comentarios = {}
+			post_echo = {}	
+			post_echo['useremail'] = post.email
+			post_echo['postid'] = post.id
+			post_echo['texto'] = post.texto
+
+			if lista_comentarios != []:
+				for comentario in lista_comentarios:
+					comentarios[comentario.id] = {	'content':comentario.content,
+													'user_comented':comentario.email_id,
+													'coment_id':comentario.id
+													}
+			
+			post_echo['coments'] = comentarios
+
+			posteos[post.id] = post_echo
+
+		bloqueEcho = ''
+		bloqueEchoDerecho = []
+		for post_echo in posteos:
+			id_posteo = str(posteos[post_echo]['postid'])
+			bloquePost = f"""
+                        <div class='card'>
+                            <div class='card-top'>
+                                <h4>{ posteos[post_echo]['useremail'] }</h4>
+
+                                <div class='delete-button' id='delete-button'method='post'>
+                                <div value='{ id_posteo }' name='post_id'>X</div>
+                                </div>
+                            </div>
+                            <div>
+                                <p>{ posteos[post_echo]['texto'] }</p>
+                            </div>
+                            <div class='reactions'>
+                            </div>
+                    	"""
+
+			bloqueComentarioCompleto = []
+			for comentario in posteos[post_echo]['coments']:
+
+				comentario_echo = f"""
+				<div class='contenedorComentarios'>
+					<div>
+						<div>
+							<span class='user'>{ posteos[post_echo]['coments'][comentario]['user_comented'] }</span>
+							<span class='comentario'>{ posteos[post_echo]['coments'][comentario]['content'] }</span>
+						</div>
+					</div>
+				</div>
+
+				"""
+				bloqueComentarioCompleto.append(comentario_echo)
+
+			bloqueComentarioCompleto = bloqueComentarioCompleto[::-1]
+			bloqueComentarioCompleto = ' '.join(bloqueComentarioCompleto)
+
+			bloquePost += bloqueComentarioCompleto
+
+			bloquePost += f"""
+				<div class='contenedorTexto'>
+					<div>
+						<span class='span-text-input'>
+							<span contenteditable='true' id='{ posteos[post_echo]['postid'] }' mensajetipo='comentario'
+								class='comentarios_otros badge alert-info' data-placeholder='Escribe un comentario...'
+								data-focused-advice='Escribe un comentario...'></span>
+						</span>
+					</div>
+				</div>
+				</div>
+			"""
+			
+			bloqueEcho += bloquePost
+
+		res = make_response(jsonify({'bloque': bloqueEcho}), 200)
+		return res
+
+
 
 ################################################################   Principal  ################################################################
 
@@ -50,13 +218,15 @@ def facebloog():
 	
 
 	if is_login():
-		posts = Post.query.filter_by(email=getEmailUser()).order_by(Post.fecha.desc()).all()
+		email = getEmailUser()
+		posts = Post.query.filter_by(email=email).order_by(Post.fecha.desc()).all()
 		comments = []
 		for post in posts:
 			comment = Comments.query.filter_by(post_id=post.id).order_by(Comments.created.desc()).all()
-			comments.append(comment)
-
-		return render_template('facebloog-inicio.html', posts=posts,comments=comments)
+			if len(comment) > 0:
+				comments.append(comment)
+		print(comments)
+		return render_template('facebloog-inicio.html', posts=posts,comments=comments,user=email)
 	else:
 		return render_template('facebloog-index.html')
 
@@ -72,7 +242,7 @@ def facebloog_perfil():
 	else:
 		return redirect('facebloog')
 
-@app.route("/registrar-usuario-facebloog", methods=["POST"])
+@app.route("/facebloog", methods=["POST"])
 def registrar_usuario_facebloog():
 	from aplicacion.models import User
 
@@ -89,7 +259,9 @@ def registrar_usuario_facebloog():
 		userProfile.setPassword(clave)
 		db.session.add(userProfile)
 		db.session.commit()
-		return render_template('facebloog-registroexitoso.html', email=email)
+
+
+		return render_template('facebloog-index.html',email=email)
 
 @app.route("/verificar-usuario", methods=["GET", "POST"])
 def verificar_usuario_facebloog():
@@ -107,40 +279,8 @@ def verificar_usuario_facebloog():
 		return redirect('facebloog')
 	return render_template('facebloog-loginfailed.html', email=email)
 
-@app.route("/crear-facebloogpost", methods=["POST"])
-def crear_facebloogpost():
-	from aplicacion.models import User
-	from aplicacion.models import Post
-	from aplicacion.login import getEmailUser
-	from aplicacion.login import is_login
 
-	if is_login():
-		email = getEmailUser()
-		user = User.query.filter_by(email=email).first()
-		texto = request.form.get("texto")
-		post = Post(texto=texto, email=user.email)
-		db.session.add(post)
-		db.session.commit()
-		return redirect("/facebloog")
 
-@app.route("/crear-facebloogcomments", methods=["POST"])
-def crear_facebloogcomments():
-	from aplicacion.models import User
-	from aplicacion.models import Post
-	from aplicacion.models import Comments
-	from aplicacion.login import getEmailUser
-	from aplicacion.login import is_login
-
-	if is_login():
-		email = getEmailUser()
-		user = User.query.filter_by(email=email).first()
-		post_id = request.form.get("post_id")
-		posts = Post.query.filter_by(id=post_id).first()
-		texto = request.form.get("texto")
-		comentario = Comments(content=texto, email_id=user.email, post_id=posts.id)
-		db.session.add(comentario)
-		db.session.commit()
-		return redirect("/facebloog")
 
 @app.route("/borrar-facebloogpost", methods=["POST"])
 def borrar_facebloogpost():

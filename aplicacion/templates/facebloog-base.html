@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<style>
-		.cards .card {
-			background-image:linear-gradient(rgb(35 194 255 / 42%), rgb(107 158 234 / 69%)), url("{{ url_for('static', filename='img/postback.jpg') }}");
-		}
-	</style>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,5 +70,9 @@
 		</div>
 
 	</div>
+
+	{% block script %}
+	
+	{% endblock %}
 </body>
 </html>
