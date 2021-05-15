@@ -300,9 +300,9 @@ body {
     }
 }
 
+
 #header_wrapper {
     width: 100%;
-    min-width: 900px;
     background-color: #372bb524;
     box-shadow: inset 0px 0px 20px 20px #fdf7f7a1;
     border: black 1px solid;

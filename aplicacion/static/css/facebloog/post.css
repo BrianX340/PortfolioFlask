@@ -8,6 +8,7 @@ body {
 }
 
 
+
 .comment-form button{
     text-align: right;
     float: right;
@@ -99,6 +100,7 @@ body {
 .cards .card {
     background: #51cfff38;
     width: 50%;
+    max-width: 500px;
     margin: 25px auto 0px auto;
     display: flex;
     flex-direction: column;
@@ -119,6 +121,7 @@ body {
 
 
 .card div p {
+    margin: 5px;
     text-align: left;
     display: flex;
     padding-left: 20px;
@@ -127,8 +130,6 @@ body {
 .card .reactions {
     height: 25px;
 }
-
-
 
 
 
@@ -238,3 +239,77 @@ body {
 #posteador div div div span span {
     font-size: 18px;
 }
+
+
+@media (max-width: 690px) {
+
+    #posteador div div div span span {
+        font-size: 14px;
+    }
+
+    #bloques .card {
+        min-height: 130px;
+    }
+
+    .contenedorComentarios div {
+        padding-left: 10px;
+    }
+
+    .contenedorTexto {
+        padding: 10px 10px 10px 10px;
+    }
+
+    .cards .card {
+        min-width: 300px;
+        margin: 20px auto auto auto;
+    }
+
+    #header_wrapper #header {
+        height: 60px;
+    }
+
+    #header .post-header {
+        display: contents;
+    }
+  
+  }
+
+@media (max-width: 400px){
+    #control {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    #header #sitename {
+        width: 33%;
+    }
+
+    #header div {
+        width: 67%;
+    }
+
+    #header #sitename a {
+        font-size: 18px;
+    }
+
+    #header .post-header a:-webkit-any-link {
+        font-size: 18px;
+    }
+
+    #footer2 {
+        width: 400px;
+        padding: 0px;
+        font-size: 12px;
+        color: #848484;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #footer_wrapper {
+        display: none;
+    }
+
+
+  }

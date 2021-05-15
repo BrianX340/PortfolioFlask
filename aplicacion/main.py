@@ -29,17 +29,6 @@ def borrar_facebloogpost():
 			db.session.commit()
 			res = make_response(jsonify({'post':'deleted'}), 200)
 			return res
-"""
-@app.route("/borrar-facebloogpost", methods=["POST"])
-def borrar_facebloogpost():
-	from aplicacion.models import Post
-
-	post_id = request.form.get("post_id")
-	post = db.session.query(Post).filter(Post.id==post_id).first()
-	db.session.delete(post)
-	db.session.commit()
-	return redirect('/facebloog')
-"""
 
 @app.route("/consulta-profile", methods=["POST"])
 def consulta_profile():
@@ -193,6 +182,7 @@ def consulta_posteos():
 
 
 
+
 ################################################################   Principal  ################################################################
 
 @app.route("/")
@@ -234,6 +224,16 @@ def facebloog():
 		return render_template('facebloog-inicio.html')
 	else:
 		return render_template('facebloog-index.html')
+
+
+@app.route("/facebloog/mobile")
+def facebloog_mobile():
+	from aplicacion.login import is_login
+	
+	if is_login():
+		return render_template('facebloog-inicio.html')
+	else:
+		return render_template('facebloog-index-mobile.html')
 
 @app.route("/facebloog-perfil")
 def facebloog_perfil():
@@ -284,8 +284,21 @@ def verificar_usuario_facebloog():
 		return redirect('facebloog')
 	return render_template('facebloog-loginfailed.html', email=email)
 
+@app.route("/verificar-usuario-facebloog-mobile", methods=["GET", "POST"])
+def verificar_usuario_facebloog_mobile():
+	from aplicacion.models import User
+	from aplicacion.login import login_user
 
-
+	email = request.form.get("email")
+	clave = request.form.get("password")
+	print(email,clave)
+	user = User.query.filter_by(email=email).first()
+	print(user)
+	correcto = user.verify_password(clave)
+	if correcto:
+		login_user(user)
+		return redirect('facebloog')
+	return render_template('facebloog-loginfailed.html', email=email)
 
 
 

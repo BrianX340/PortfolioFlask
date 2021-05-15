@@ -1,4 +1,13 @@
 
+
+if (screen.width <= 600) { 
+    window.location = window.location['href']+'/mobile'; 
+    } 
+
+
+
+
+
 window.onload = () => {
 
     document.addEventListener('keyup', logKey);
