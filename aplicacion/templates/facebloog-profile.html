@@ -12,5 +12,38 @@
 
 {% block body %}
 
+<div id='profile-section'>
+    <div class="card">
+        <div>
+            <div class='profileimage'>
+                <img src="{{ url_for('static', filename='img/facebloog/profile_blank.png') }}" alt="">
+            </div>
+            <div class='userinfo'>
+                <div>
+                    <div>
+                        <span>Nombre:</span><span id='name'>Brian</span>
+                    </div>
+                    <div>
+                        <span>Apellido:</span><span id='lastname'>Rodriguez</span>
+                    </div>
+                    <div>
+                        <span>Email:</span><span id='email'>brianx340@gmail</span>
+                    </div>
+                    <div>
+                        <span>Cantidad de Posteos:</span><span id='cantpost'>1250</span>
+                    </div>
+                    <div>
+                        <span>Cantidad de Comentarios:</span><span id='cantcoment'>3200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock %}
+
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/facebloog/profile.js') }}"></script>
 {% endblock %}

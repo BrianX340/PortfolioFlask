@@ -1,6 +1,6 @@
 from flask_script import Manager
 from aplicacion.main import app, db
-from aplicacion.models import Post, User
+from aplicacion.models import Post, User, Comments
 
 
 
