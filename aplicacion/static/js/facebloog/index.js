@@ -1,5 +1,5 @@
 
-if (screen.width <= 600) { 
+if (screen.width <= 400) { 
     window.location = window.location['href']+'/mobile'; 
 }else{
     document.getElementById('body').style.display = 'block';

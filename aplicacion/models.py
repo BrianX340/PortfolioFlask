@@ -17,6 +17,21 @@ class User(db.Model):
 	lastname = Column(String, nullable=False)
 	#phone = Column(String, nullable=False)
 	password = Column(String(128),nullable=False)
+
+	def setEmail(self,email):
+		email = [x.lower() for x in email]
+		email = ''.join(email)
+		self.email = email
+
+	def setLastName(self,lastname):
+		lastname = [x.lower() for x in lastname]
+		lastname = ''.join(lastname)
+		self.lastname = lastname
+
+	def setName(self,name):
+		name = [x.lower() for x in name]
+		name = ''.join(name)
+		self.name = name
 	
 	def setPassword(self,clave):
 		clave = hashlib.new("sha1", clave.encode("utf-8"))

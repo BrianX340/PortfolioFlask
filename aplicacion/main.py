@@ -190,19 +190,50 @@ def crear_usuario_facebloog_mobile():
 
 	nombre = request.form.get("name")
 	apellido = request.form.get("lastname")
-	email = request.form.get("email")
-	clave = request.form.get("password")
+	email = request.form.get("emailregister")
+	clave = request.form.get("passwordregister")
 	user_email = User.query.filter_by(email=email).first()
 	
 	if user_email is not None:
 		return render_template('facebloog-mensaje.html', email=email)
 	else:
-		userProfile = User(name=nombre, lastname=apellido, email=email)
+		userProfile = User()
+		userProfile.setEmail(email)
+		userProfile.setName(nombre)
+		userProfile.setLastName(apellido)
 		userProfile.setPassword(clave)
 		db.session.add(userProfile)
 		db.session.commit()
 
-		return render_template('facebloog-index-mobile.html',email=email)
+		return render_template('facebloog-index.html',email=email)
+
+@app.route("/facebloog", methods=["POST"])
+def registrar_usuario_facebloog():
+	from aplicacion.models import User
+
+	nombre = [x.lower() for x in request.form.get("name")]
+	nombre = ''.join(nombre)
+
+	apellido = request.form.get("lastname")
+
+	email = request.form.get("emailregister")
+
+	clave = request.form.get("passwordregister")
+	user_email = User.query.filter_by(email=email).first()
+	
+	if user_email is not None:
+		return render_template('facebloog-mensaje.html', email=email)
+	else:
+		userProfile = User()
+		userProfile.setEmail(email)
+		userProfile.setName(nombre)
+		userProfile.setLastName(apellido)
+		userProfile.setPassword(clave)
+
+		db.session.add(userProfile)
+		db.session.commit()
+
+		return render_template('facebloog-index.html',email=email)
 
 
 @app.route("/verificar-usuario-facebloog-mobile", methods=["GET", "POST"])
@@ -224,6 +255,36 @@ def verificar_usuario_facebloog_mobile():
 @app.route("/busqueda")
 def busqueda():
 	return render_template('facebloog-busqueda.html')
+
+
+@app.route("/iniciar-busqueda", methods=["POST"])
+def iniciar_busqueda_usuarios():
+	from aplicacion.models import User
+	from aplicacion.login import is_login
+
+	req = request.get_json()
+	usuario_buscado = str(req['usuarioBuscado'])
+
+	if is_login():
+		users = User.query.filter_by(name=usuario_buscado).all()
+
+		usuarios = {}
+		if users != []:
+			for user in users:
+				usuario_objeto = {
+					'name': user.name,
+					'lastname': user.lastname,
+					'email': user.email
+				}
+				usuarios[user.email] = usuario_objeto
+		if len(usuarios)>0:
+			res = make_response(jsonify({"usuarios": usuarios}), 200)
+			return res
+		else:
+			res = make_response(jsonify({"usuarios": "none"}), 200)
+			return res
+
+		
 
 
 ################################################################   Principal  ################################################################
@@ -290,25 +351,7 @@ def facebloog_perfil():
 	else:
 		return redirect('facebloog')
 
-@app.route("/facebloog", methods=["POST"])
-def registrar_usuario_facebloog():
-	from aplicacion.models import User
 
-	nombre = request.form.get("name")
-	apellido = request.form.get("lastname")
-	email = request.form.get("emailregister")
-	clave = request.form.get("passwordregister")
-	user_email = User.query.filter_by(email=email).first()
-	
-	if user_email is not None:
-		return render_template('facebloog-mensaje.html', email=email)
-	else:
-		userProfile = User(name=nombre, lastname=apellido, email=email)
-		userProfile.setPassword(clave)
-		db.session.add(userProfile)
-		db.session.commit()
-
-		return render_template('facebloog-index.html',email=email)
 
 @app.route("/verificar-usuario", methods=["GET", "POST"])
 def verificar_usuario_facebloog():
