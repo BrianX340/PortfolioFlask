@@ -1,0 +1,38 @@
+{% extends "facebloog-base.html" %}
+
+{% block enlace %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/facebloog/busqueda.css') }}"> 
+{% endblock %}
+
+
+
+{% block body %}
+<div class='parent'>
+    <div class="contenedor">
+        <div class='busqueda'>
+            <div>
+                
+                <div class='contenedor-busqueda'>
+                    <div class="textcontent"></div>
+                    <input class='buscar'></input>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class='resultados'>
+            <div id='titulo-resultados'>
+                <span>Resultados</span>
+            </div>
+            <div class='container'>
+                <div class='result'>
+                    <span>Resultado 1</span>
+                </div>
+                <div class='result'>
+                    <span>Resultado 2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

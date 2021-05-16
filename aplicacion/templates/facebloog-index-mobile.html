@@ -7,6 +7,12 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/facebloog/index_mobile.css') }}">
 	<title>{% block title %}Facebloog | Bienvenido!{% endblock %}</title>
 
+    <script>
+        function crearCuenta(){
+            window.location = window.location['href']+'-register'; 
+        }
+    </script>
+
 </head>
     <body>
         
@@ -28,17 +34,18 @@
                     <div class='entrar'>
                         <button>Entrar</button>
                     </div>
+            </form>
                     <div class='olvidaste'>
                         <span>Olvidaste la contraseña</span>
                     </div>
                     <div class='separador'>
                         <span>-----------------------</span>
                     </div>
-                    <div class='crearcuenta'>
-                        <span>Crear Cuenta Nueva</span>
-                    </div>
+                        <div class='crearcuenta'>
+                            <a href="{{ url_for('facebloog_create_account_mobile') }}">Crear Cuenta Nueva</a>
+                        </div>
                 </div>
-            </form>
+            
         </div>
     </body>
 

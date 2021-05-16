@@ -10,6 +10,7 @@
         <li id="sitename"><a href="{{ url_for('facebloog') }}">Facebloog</a></li>
         {% block header %}
         <ul class="post-header">
+            <li><a href="{{ url_for('busqueda') }}" id='busqueda'>Buscar</a></li>
             <li><a href="{{ url_for('facebloog_perfil') }}">Perfil</a></li>
             <li><a href="{{ url_for('facebloog_logout') }}">Logout</a></li>
         </ul>

@@ -8,7 +8,13 @@
 </form>
 {% endblock %}
 
-{% block enlace %}<link rel="stylesheet" href="{{ url_for('static', filename='css/facebloog/index_mobile.css') }}">{% endblock %}
+{% block enlace %}
+<style>
+    #body {
+        display: none;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
 <script>

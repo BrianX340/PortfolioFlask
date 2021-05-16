@@ -180,7 +180,50 @@ def consulta_posteos():
 		res = make_response(jsonify({'bloque': bloqueEcho}), 200)
 		return res
 
+@app.route("/facebloog-register")
+def facebloog_create_account_mobile():
+	return render_template('facebloog-index-mobile-register.html')
 
+@app.route("/facebloog", methods=["POST"])
+def crear_usuario_facebloog_mobile():
+	from aplicacion.models import User
+
+	nombre = request.form.get("name")
+	apellido = request.form.get("lastname")
+	email = request.form.get("email")
+	clave = request.form.get("password")
+	user_email = User.query.filter_by(email=email).first()
+	
+	if user_email is not None:
+		return render_template('facebloog-mensaje.html', email=email)
+	else:
+		userProfile = User(name=nombre, lastname=apellido, email=email)
+		userProfile.setPassword(clave)
+		db.session.add(userProfile)
+		db.session.commit()
+
+		return render_template('facebloog-index-mobile.html',email=email)
+
+
+@app.route("/verificar-usuario-facebloog-mobile", methods=["GET", "POST"])
+def verificar_usuario_facebloog_mobile():
+	from aplicacion.models import User
+	from aplicacion.login import login_user
+
+	email = request.form.get("email")
+	clave = request.form.get("password")
+	print(email,clave)
+	user = User.query.filter_by(email=email).first()
+	print(user)
+	correcto = user.verify_password(clave)
+	if correcto:
+		login_user(user)
+		return redirect('facebloog')
+	return render_template('facebloog-loginfailed.html', email=email)
+
+@app.route("/busqueda")
+def busqueda():
+	return render_template('facebloog-busqueda.html')
 
 
 ################################################################   Principal  ################################################################
@@ -265,7 +308,6 @@ def registrar_usuario_facebloog():
 		db.session.add(userProfile)
 		db.session.commit()
 
-
 		return render_template('facebloog-index.html',email=email)
 
 @app.route("/verificar-usuario", methods=["GET", "POST"])
@@ -284,21 +326,7 @@ def verificar_usuario_facebloog():
 		return redirect('facebloog')
 	return render_template('facebloog-loginfailed.html', email=email)
 
-@app.route("/verificar-usuario-facebloog-mobile", methods=["GET", "POST"])
-def verificar_usuario_facebloog_mobile():
-	from aplicacion.models import User
-	from aplicacion.login import login_user
 
-	email = request.form.get("email")
-	clave = request.form.get("password")
-	print(email,clave)
-	user = User.query.filter_by(email=email).first()
-	print(user)
-	correcto = user.verify_password(clave)
-	if correcto:
-		login_user(user)
-		return redirect('facebloog')
-	return render_template('facebloog-loginfailed.html', email=email)
 
 
 

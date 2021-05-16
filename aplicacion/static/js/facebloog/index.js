@@ -1,14 +1,17 @@
 
-
 if (screen.width <= 600) { 
     window.location = window.location['href']+'/mobile'; 
-    } 
+}else{
+    document.getElementById('body').style.display = 'block';
+}
+
 
 
 
 
 
 window.onload = () => {
+    
 
     document.addEventListener('keyup', logKey);
 

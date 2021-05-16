@@ -1,3 +1,37 @@
+window.onload = () => {
+    recivir_post()
+
+
+
+
+    document.addEventListener('click', function (e) {
+            if (e['path']['0']['className'] == 'delete'){
+                let postid = e['target']['attributes']['0']['value']
+                borrarPost(postid)
+            }
+        })
+  
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') {
+            mensajetipo = e.path[0].getAttribute('mensajetipo')
+
+            /* Aca separamos por tipo de mensaje */
+            if (mensajetipo == 'posteo') {
+                submit_post(e)
+                recivir_post()
+            } else if (mensajetipo == 'comentario') {
+                submit_commentario(e)
+                recivir_post()
+            }
+            
+            
+        }
+        
+    })
+}
+
+
+
 function submit_post(e) {
     let posteo = document.getElementById("queestaspensando");
     let message = posteo.textContent;
@@ -143,36 +177,5 @@ function borrarPost(postid){
 
 
 
-window.onload = () => {
-    recivir_post()
 
-    document.addEventListener('click', function (e) {
-            if (e['path']['0']['className'] == 'delete'){
-                let postid = e['target']['attributes']['0']['value']
-                borrarPost(postid)
-            }
-
-    })
-  
-
-
-
-    document.addEventListener('keyup', function (e) {
-        if (e.key === 'Enter') {
-            mensajetipo = e.path[0].getAttribute('mensajetipo')
-
-            /* Aca separamos por tipo de mensaje */
-            if (mensajetipo == 'posteo') {
-                submit_post(e)
-                recivir_post()
-            } else if (mensajetipo == 'comentario') {
-                submit_commentario(e)
-                recivir_post()
-            }
-            
-            
-        }
-        
-    })
-}
 

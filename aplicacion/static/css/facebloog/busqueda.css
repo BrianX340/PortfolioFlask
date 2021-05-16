@@ -1,0 +1,132 @@
+
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+
+.resultados {
+    display: flex;
+    background-color: #a8e4f9;
+    border-radius: 30px;
+    padding: 5px;
+    margin: auto;
+    /* min-height: 600px; */
+    min-width: 250px;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.resultados div {
+    flex-direction: column;
+    width: 95%;
+    background-color: #0077ff8f;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
+#titulo-resultados {
+    width: 95%;
+    background-color: #0e61bf99;
+    border-radius: 11px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    color: #000000;
+    box-shadow: 0 0 12px #7200ff7a;
+    border: 1px solid #00000087;
+}
+
+.textcontent {
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/yXw2vmEvHEh.png);
+    background-position: 0 -861px;
+    background-size: auto;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.busqueda {
+    display: flex;
+    background-color: #ffffffa8;
+    border-radius: 30px;
+    padding: 5px;
+    margin: auto;
+    min-height: 20px;
+    min-width: 250px;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.busqueda div {
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+}
+
+.contenedor-busqueda {
+    display: flex;
+    width: 100%;
+}
+
+.contenedor-busqueda div {
+    display: flex;
+    width: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.contenedor-busqueda input {
+    width: 90%;
+    height: 16px;
+    border-radius: 25px;
+    background-color: #ffffffba;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}
+
+.container .result {
+    background-color: #ffffffcc;
+    width: 95%;
+    margin-top: 10px;
+    text-align: initial;
+    display: flex;
+    align-items: baseline;
+}
+
+.container .result:last-child {
+    margin-bottom: 10px;
+}
+
+.container .result span {
+    margin-left: 15px;
+}
+
+.parent {
+    padding-right: 15px;
+    padding-left: 5px;
+}
