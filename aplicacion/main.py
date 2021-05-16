@@ -1,7 +1,14 @@
 from flask import Flask, render_template, request, redirect, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 
+from werkzeug.utils import secure_filename
+
 import hashlib
+
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
+
+import os
 
 app = Flask(__name__)
 app.config.from_object('aplicacion.config')
@@ -10,6 +17,30 @@ db = SQLAlchemy(app)
 
 
 ################################################################   Comunicacion JS y Python  ################################################################
+
+
+@app.route("/formulario-foto")
+def upload_profile_photo():
+	return render_template('formulario.html')
+
+@app.route("/uploader",methods=['POST'])
+def uploader():
+	if request.method == "POST":
+		f = request.files['foto_perfil']
+		filename = secure_filename(f.filename)
+		f.save(os.path.join(app.config['FOTOS_PERFIL'], filename))
+		return "Archivo subido con exito"
+
+
+@app.route("/downloader",methods=['GET'])
+def downloader():
+	req = request.get_json()
+	perofile_photo = str(req['profilephoto'])
+	if request.method == "GET":
+
+		return send_from_directory(directory="FOTOS_PERFIL", filename=perofile_photo, as_attachment=True)
+
+
 
 @app.route("/borrar-facebloogpost", methods=["POST"])
 def borrar_facebloogpost():
@@ -50,7 +81,8 @@ def consulta_profile():
 			'lastname': user.lastname,
 			'email': user.email,
 			'posts': str(len(post)),
-			'coments': str(len(coments))
+			'coments': str(len(coments)),
+			'profile_photo': user.profile_photo
 		}
 
 		res = make_response(jsonify(data_profile), 200)
@@ -202,6 +234,7 @@ def crear_usuario_facebloog_mobile():
 		userProfile.setName(nombre)
 		userProfile.setLastName(apellido)
 		userProfile.setPassword(clave)
+		userProfile.setProfilePhoto('.')
 		db.session.add(userProfile)
 		db.session.commit()
 

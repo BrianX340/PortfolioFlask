@@ -43,11 +43,11 @@ function iniciarBusqueda(usuarioBuscado){
                     let bloque_codigo = ""
                     for (let usuario in data['usuarios']){
 
-                        let name = data['usuarios'][usuario]['name']
-                        let lastname = data['usuarios'][usuario]['lastname']
+                        let name = capitalize(data['usuarios'][usuario]['name'])
+                        let lastname = capitalize(data['usuarios'][usuario]['lastname'])
                         let email = data['usuarios'][usuario]['email']
 
-                        let p1 = "<div class='result'><a href='#' >NAME LASTNAME  ---> EMAIL</a></div>".replace('NAME', name).replace('LASTNAME', lastname).replace('EMAIL', email)
+                        let p1 = "<div><div class='result'><div><a href='#' >NAME LASTNAME</a><a>EMAIL</a></div><div><img src='{{ url_for('static', filename='img/profilephotos/USERPHOTO') }}'> alt=''></div></div></div>".replace('NAME', name).replace('LASTNAME', lastname).replace('EMAIL', email).replace('USERPHOTO', 'brian.jpg')
 
                         bloque_codigo = bloque_codigo + p1
                         
@@ -68,6 +68,11 @@ function iniciarBusqueda(usuarioBuscado){
         });
     /*aca limpiamos el campo*/
 }
+
+function capitalize(string){
+    string = string[0].toUpperCase() + string.slice(1);
+    return string;
+  }
 
 function logKey() {
     const clave = document.getElementById('passwordregister')
