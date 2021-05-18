@@ -76,6 +76,34 @@
     margin-bottom: 10px;
 }
 
+#profile-image {
+    background-image: url("");
+    background-size: 100%;
+}
+
+#formuploadphoto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px white solid;
+    border-radius: 25px;
+    background-color: #ffffffc4;
+    display: none;
+}
+
+#formuploadphoto input:first-child {
+    font-size: 12px;
+    display: flow-root;
+    max-width: 95%;
+}
+
+#formuploadphoto input:last-child {
+    width: 49%;
+}
+
 @media (max-width: 400px){
     #profile-section .card .userinfo div {
         display: flex;

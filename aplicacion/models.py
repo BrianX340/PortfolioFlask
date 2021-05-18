@@ -19,8 +19,11 @@ class User(db.Model):
 	password = Column(String(128),nullable=False)
 	profile_photo = Column(String, nullable=False)
 
-	def setProfilePhoto(self,dir):
-		self.profile_photo = dir
+	def setProfilePhoto(self, name_photo):
+		self.profile_photo = name_photo
+
+	def deleteProfilePhoto(self):
+		self.profile_photo = 'none'
 
 	def setEmail(self,email):
 		email = [x.lower() for x in email]

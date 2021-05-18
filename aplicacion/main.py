@@ -10,6 +10,9 @@ from flask import send_from_directory
 
 import os
 
+import random
+import string
+
 app = Flask(__name__)
 app.config.from_object('aplicacion.config')
 app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -25,20 +28,33 @@ def upload_profile_photo():
 
 @app.route("/uploader",methods=['POST'])
 def uploader():
-	if request.method == "POST":
-		f = request.files['foto_perfil']
-		filename = secure_filename(f.filename)
-		f.save(os.path.join(app.config['FOTOS_PERFIL'], filename))
-		return "Archivo subido con exito"
+	from aplicacion.login import getEmailUser
+	from aplicacion.login import is_login
+	from aplicacion.models import User
+
+	if is_login():
+		if request.method == "POST":
+			letters = string.ascii_lowercase
+			name_photo = ''.join(random.choice(letters) for i in range(25))
+			name_photo += '.jpg'
+			email = getEmailUser()
+			user = User.query.filter_by(email=email).first()
+			user.setProfilePhoto(name_photo)
+			db.session.add(user)
+			db.session.commit()
+
+			f = request.files['foto_perfil']
+			f.save(os.path.join(app.static_folder+'\\profilephotos\\', name_photo))
+			return redirect('facebloog-perfil')
 
 
-@app.route("/downloader",methods=['GET'])
-def downloader():
-	req = request.get_json()
-	perofile_photo = str(req['profilephoto'])
-	if request.method == "GET":
-
-		return send_from_directory(directory="FOTOS_PERFIL", filename=perofile_photo, as_attachment=True)
+@app.route("/downloader/<path:filename>")
+def downloader(filename):
+	print(app.static_folder+'\\profilephotos\\'+f'{filename}')
+	return send_from_directory(
+		app.static_folder+'\\profilephotos\\',
+		filename= f'{filename}',
+		as_attachment=True)
 
 
 
@@ -234,7 +250,7 @@ def crear_usuario_facebloog_mobile():
 		userProfile.setName(nombre)
 		userProfile.setLastName(apellido)
 		userProfile.setPassword(clave)
-		userProfile.setProfilePhoto('.')
+		userProfile.setProfilePhoto('none')
 		db.session.add(userProfile)
 		db.session.commit()
 
@@ -262,6 +278,7 @@ def registrar_usuario_facebloog():
 		userProfile.setName(nombre)
 		userProfile.setLastName(apellido)
 		userProfile.setPassword(clave)
+		userProfile.setProfilePhoto('none')
 
 		db.session.add(userProfile)
 		db.session.commit()

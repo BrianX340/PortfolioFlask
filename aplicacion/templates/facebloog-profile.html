@@ -15,8 +15,13 @@
 <div id='profile-section'>
     <div class="card">
         <div>
-            <div class='profileimage' id='profile-image'>
-                <img src="{{ url_for('static', filename='img/profilephotos/profile_blank.png') }}" alt="">
+            <div class='profileimage' >
+                <img id='profile-image' alt="">
+                <form onsubmit='recivir_profile()' id='formuploadphoto' action="/uploader" method="POST" enctype="multipart/form-data">
+                    <input id="inputin" type="file" name="foto_perfil" value="none">
+                    <br>
+                    <input type="submit">
+                </form>
             </div>
             <div class='userinfo'>
                 <div>
