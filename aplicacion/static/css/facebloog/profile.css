@@ -1,4 +1,3 @@
-
 #profile-section {
     display: flex;
     width: 100%;
@@ -17,7 +16,7 @@
     flex-direction: column;
 }
 
-#profile-section .card div{
+#profile-section .card div {
     display: flex;
     width: 95%;
     height: 90%;
@@ -58,14 +57,14 @@
     margin: auto 10px auto 0px;
     padding-left: 10px;
     text-align: left;
-} 
+}
 
 #profile-section .card .userinfo div div span:last-child {
     padding-right: 10px;
     width: 100%;
     margin: auto 10px auto 0px;
     text-align: right;
-} 
+}
 
 #profile-section .card .userinfo div div {
     background-color: #ffffff8f;
@@ -93,8 +92,6 @@
     display: none;
 }
 
-
-
 #formuploadphoto input:first-child {
     font-size: 12px;
     display: flow-root;
@@ -105,7 +102,7 @@
     width: 49%;
 }
 
-@media (max-width: 400px){
+@media (max-width: 400px) {
     #profile-section .card .userinfo div {
         display: flex;
         width: 98%;
@@ -115,52 +112,42 @@
         margin: 0px;
         font-size: 12px;
     }
-
     #profile-section .card .userinfo {
         display: flex;
         width: 100%;
         height: 100%;
         flex-direction: column;
     }
-
     #profile-section .card div {
         flex-direction: column;
     }
-
     #profile-section .card .profileimage {
         width: 40%;
         height: 40%;
     }
-
-    #header div {  
+    #header div {
         width: 66%;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
     }
-
     .post-header {
         width: 100%;
     }
-
     #header #sitename a {
         font-size: 18px;
     }
-
     .post-header li a {
         color: white;
         text-decoration: none;
         font-size: 20px;
         font-weight: 500;
     }
-
     #header #sitename {
         width: 25%;
         padding-left: 27px;
-
     }
-
     .post-header li:first-child {
         padding-right: 22px;
     }

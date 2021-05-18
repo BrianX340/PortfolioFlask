@@ -1,15 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
-
-
 body {
     scroll-behavior: smooth;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
+#control section {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    text-align: initial;
+}
 
-
-.comment-form button{
+.comment-form button {
     text-align: right;
     float: right;
     margin-top: 3px;
@@ -17,9 +21,6 @@ body {
     background: linear-gradient(to bottom, rgb(196 251 205 / 91%) 0%, rgb(56 163 255 / 92%) 100%);
     box-shadow: 0 0 20px #fbfbfb;
 }
-
-
-
 
 #header_wrapper #header {
     display: flex;
@@ -37,8 +38,7 @@ body {
     margin: auto;
 }
 
-
-#header .post-header a:-webkit-any-link{
+#header .post-header a:-webkit-any-link {
     color: white;
     text-decoration: none;
     font-size: 20px;
@@ -49,7 +49,6 @@ body {
     display: table-caption;
 }
 
-
 .login-form input {
     min-height: 25px;
     min-width: 40px;
@@ -59,7 +58,6 @@ body {
     background: linear-gradient(to bottom, rgb(196 251 205 / 91%) 0%, rgb(56 163 255 / 92%) 100%);
     box-shadow: 0 0 20px #fbfbfb;
 }
-
 
 .cards {
     display: flex;
@@ -81,13 +79,13 @@ body {
     padding-left: 20px;
 }
 
-.cards .card-top .delete-button{
+.cards .card-top .delete-button {
     margin: auto;
     width: 25px;
     height: 25px;
 }
 
-.cards .card-top .delete-button div{
+.cards .card-top .delete-button div {
     align-items: center;
     justify-content: center;
     width: 25px;
@@ -112,13 +110,10 @@ body {
     display: flex;
 }
 
-
 .card div .comment-form {
     width: 15%;
     margin: auto;
 }
-
-
 
 .card div p {
     margin: 5px;
@@ -131,27 +126,20 @@ body {
     height: 25px;
 }
 
-
-
 /* #################################  Coment User Box ################################# */
-
 
 .comment-form .contenedorComentarios {
     border: none;
 }
 
-.comment-form .contenedorComentarios div{
+.comment-form .contenedorComentarios div {
     border: none;
 }
-
-
 
 .contenedorComentarios {
     display: flex;
     padding-top: 8px;
 }
-
-
 
 .contenedorComentarios div div {
     flex-direction: column;
@@ -162,7 +150,6 @@ body {
     padding-right: 20px;
     background-color: #24f9d280;
 }
-
 
 .contenedorComentarios div div span:first-child {
     font-size: 13px;
@@ -180,31 +167,22 @@ body {
     width: 100%;
 }
 
-
-
-
-
-
-
-
 .span-text-input span.badge[contenteditable] {
     display: inline-block;
 }
+
 .span-text-input span.badge[contenteditable]:empty::before {
     content: attr(data-placeholder);
     display: inline-block;
     color: rgb(24, 24, 24);
 }
+
 .span-text-input span.badge[contenteditable]:empty:focus::before {
     content: attr(data-placeholder);
     color: rgb(83, 83, 83);
 }
 
 /* #################################  Coment User Box ################################# */
-
-.contenedorTexto {
-    padding: 10px 10px 10px 40px;
-}
 
 .contenedorTexto div {
     text-align: left;
@@ -223,80 +201,93 @@ body {
     outline: none;
 }
 
+.contenedorTexto {
+    padding: 10px 10px 10px 10px;
+}
+
 /* #################################  Posteo User Box ################################# */
 
-#posteador div div {
-    padding: 10px 40px 10px 20px;
-    border-radius: 30px;
+#posteador .card {
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    height: 30px;
+}
+
+#posteador .contenedorTexto {
+    padding: 0px;
+}
+
+#posteador .card div {
     width: 100%;
-    margin-right: 60px;
-    margin-left: 18px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    border-radius: 25px;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
 }
-#posteador div div div {
-    background-color: #06f7889c;
+
+#posteador #profileimage {
+    width: 32px;
 }
 
-#posteador div div div span span {
-    font-size: 18px;
+#profileimage div {
+    background-size: cover;
+    border-radius: 25px;
 }
 
+#posteador .contenedorTexto div {
+    margin-left: 10px;
+    border-radius: 42px;
+    align-items: center;
+    justify-content: left;
+    height: 20px;
+    padding-left: 10px;
+}
 
-@media (max-width: 690px) {
-
-    #posteador div div div span span {
-        font-size: 14px;
-    }
-
+@media (max-width: 1200px) {
     #bloques .card {
         min-height: 130px;
     }
-
     .contenedorComentarios div {
         padding-left: 10px;
     }
-
-    .contenedorTexto {
-        padding: 10px 10px 10px 10px;
-    }
-
     .cards .card {
-        min-width: 300px;
+        min-width: 245px;
         margin: 20px auto auto auto;
     }
-
     #header_wrapper #header {
         height: 60px;
     }
-
     #header .post-header {
         display: contents;
     }
-  
-  }
-
-@media (max-width: 400px){
+    #posteador div div {
+        padding: 0;
+        border-radius: 0px;
+        margin: 0;
+    }
     #control {
         display: flex;
         flex-direction: column;
-        width: 100vw;
+        min-width: 270px;
     }
-
     #header #sitename {
-        width: 33%;
+        display: none;
     }
-
     #header div {
-        width: 67%;
+        width: 100%;
     }
-
     #header #sitename a {
         font-size: 18px;
     }
-
     #header .post-header a:-webkit-any-link {
         font-size: 18px;
     }
-
     #footer2 {
         width: 400px;
         padding: 0px;
@@ -306,10 +297,19 @@ body {
         flex-direction: column;
         text-align: center;
     }
-
     #footer_wrapper {
         display: none;
     }
-
-
-  }
+    #header div:last-child {
+        display: flex;
+        width: 100%;
+    }
+    .post-header li {
+        background-color: #ffffff8c;
+        padding: 0px 8px 0px 8px;
+        border-radius: 27px;
+    }
+    #header div .post-header li a:-webkit-any-link {
+        color: #000000a6;
+    }
+}

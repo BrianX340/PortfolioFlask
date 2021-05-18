@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -55,7 +54,6 @@ body {
     display: flex;
 }
 
-
 .email input, .clave input {
     width: 95%;
     background-color: #e8f0fe;
@@ -73,7 +71,6 @@ body {
     width: 100%;
     border-radius: 8px;
 }
-
 
 .olvidaste span {
     color: #909090;
@@ -101,7 +98,3 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
-
-

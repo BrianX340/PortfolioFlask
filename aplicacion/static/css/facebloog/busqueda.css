@@ -26,7 +26,7 @@
 }
 
 .resultados div {
-    background-color: #8282826e;
+    background-color: #0050ff40;
     min-height: 30px;
     display: flex;
     align-items: center;
@@ -52,8 +52,6 @@
     font-size: 23px;
     color: #000000;
     box-shadow: 0 0 12px #0014ff36;
-    /* border: 1px solid #00000087; */
-    border: 2px black solid;
 }
 
 .textcontent {
@@ -114,7 +112,7 @@
 
 .parent {
     padding-right: 15px;
-    padding-left: 5px;
+    padding-left: 3px;
 }
  
 .result div:first-child {
@@ -130,8 +128,93 @@
     height: 40px;
     margin: 5px 15px 5px 15px;
     display: flex;
+    background-color: #3d00ff6b;
 }
 
 #usuarios {
     flex-direction: column;
+}
+
+.result div a {
+    color: white;
+}
+
+@media (max-width: 350px) {
+    #titulo-resultados {
+        background-color: #0009ffc9;
+        min-height: 13px;
+        font-size: 15px;
+        color: white;
+        display: flex;
+        margin: 5px;
+        padding: 0;
+    }
+
+    #header #sitename {
+        display: none;
+    }
+    
+    .resultados div {
+        background-color: #0009ff9e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin-top: 10px;
+        padding-bottom: 5px;
+        width: 95%;
+        border: none;
+        font-size: 20px;
+    }
+
+    .result div:first-child {
+        width: 50px;
+        height: 30px;
+        /* margin: 0px 0px 0px 0px; */
+        border-radius: 60px;
+        /* display: flex; */
+        background-size: cover;
+        padding: 4px;
+
+    }
+
+    .result div a {
+        display: contents;
+        color: #000000;
+        font-size: 15px;
+    }
+
+    #usuarios .result div:last-child {
+        background-color: #ffffff00;
+        border: none;
+    }
+
+    #usuarios div {  
+        border: none;
+        border-radius: 20px;
+        background-color: #00ffab6b;
+    }
+
+    #usuarios {
+        flex-direction: column;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    #header div:last-child {
+        display: flex;
+        width: 100%;
+    }
+
+    .post-header li {
+        background-color: #ffffff8c;
+        padding: 0px 8px 0px 8px;
+        border-radius: 27px;
+    }
+
+    #header div .post-header li a:-webkit-any-link{
+        color: #000000a6;
+    }
+
+
 }

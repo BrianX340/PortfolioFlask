@@ -4,13 +4,14 @@ window.onload = () => {
 
 
 
+
     document.addEventListener('click', function (e) {
-            if (e['path']['0']['className'] == 'delete'){
-                let postid = e['target']['attributes']['0']['value']
-                borrarPost(postid)
-            }
-        })
-  
+        if (e['path']['0']['className'] == 'delete') {
+            let postid = e['target']['attributes']['0']['value']
+            borrarPost(postid)
+        }
+    })
+
     document.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
             mensajetipo = e.path[0].getAttribute('mensajetipo')
@@ -23,10 +24,10 @@ window.onload = () => {
                 submit_commentario(e)
                 recivir_post()
             }
-            
-            
+
+
         }
-        
+
     })
 }
 
@@ -108,21 +109,20 @@ function submit_commentario(e) {
 function recivir_post() {
 
 
-
     let entry = {
         'post': 'data_comment'
     };
 
     fetch(`${window.origin}/consulta-posteos`,
-    {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
+        {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
         })
-    })
         .then(function (response) {
 
             if (response.status !== 200) {
@@ -131,31 +131,32 @@ function recivir_post() {
             }
             response.json().then(function (data) {
                 /*aca tomamos todo el texto html con comentarios y posteos y los introducimos en el document*/
-               document.getElementById('bloques').innerHTML = data['bloque']
+                document.getElementById('bloques').innerHTML = data['bloque']
+                document.getElementById('profileimage').innerHTML = "<div style='background-image: url(WINDOWSORIGIN/downloader/URLIMG)'>".replace('URLIMG', data['imagename']).replace('WINDOWSORIGIN', window.origin)
             });
 
         })
         .catch(function (error) {
             console.log("Fetch error: " + error);
-    });
+        });
 
 }
 
-function borrarPost(postid){
+function borrarPost(postid) {
     let entry = {
         'postdelete': postid
     };
 
     fetch(`${window.origin}/borrar-facebloogpost`,
-    {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
+        {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
         })
-    })
         .then(function (response) {
 
             if (response.status !== 200) {
@@ -163,15 +164,15 @@ function borrarPost(postid){
                 return;
             }
             response.json().then(function (data) {
-               if (data['post'] == 'deleted'){
-                recivir_post()
-               }
+                if (data['post'] == 'deleted') {
+                    recivir_post()
+                }
             });
 
         })
         .catch(function (error) {
             console.log("Fetch error: " + error);
-    });
+        });
 }
 
 

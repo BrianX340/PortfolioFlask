@@ -4,7 +4,7 @@
 
 
 window.onload = () => {
-    
+
 
     document.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
@@ -17,7 +17,7 @@ window.onload = () => {
 
 }
 
-function iniciarBusqueda(usuarioBuscado){
+function iniciarBusqueda(usuarioBuscado) {
     let entry = {
         usuarioBuscado: usuarioBuscado.toLowerCase()
     };
@@ -36,12 +36,12 @@ function iniciarBusqueda(usuarioBuscado){
                 return;
             }
             response.json().then(function (data) {
-                if (data['usuarios'] != 'none'){
+                if (data['usuarios'] != 'none') {
                     bloquehtml = document.getElementById('usuarios')
 
 
                     let bloque_codigo = ""
-                    for (let usuario in data['usuarios']){
+                    for (let usuario in data['usuarios']) {
 
                         let name = capitalize(data['usuarios'][usuario]['name'])
                         let lastname = capitalize(data['usuarios'][usuario]['lastname'])
@@ -50,12 +50,12 @@ function iniciarBusqueda(usuarioBuscado){
                         let p1 = "<div class='result'><div style='background-image: url(WINDOWSORIGIN/downloader/URLIMG)'></div><div><a href='#' >NAME LASTNAME</a></div></div>".replace('NAME', name).replace('LASTNAME', lastname).replace('URLIMG', image_name).replace('WINDOWSORIGIN', window.origin)
 
                         bloque_codigo = bloque_codigo + p1
-                        
+
                     }
                     bloquehtml.innerHTML = bloque_codigo
                     document.getElementById('busqueda').value = ''
                     document.getElementById('resultados').style.display = 'flex'
-                }else{
+                } else {
                     bloquehtml = document.getElementById('usuarios')
                     bloquehtml.innerHTML = "<div class='result'><a>No se encontraron usuarios con el nombre: INSERTNAME</a></div>".replace("INSERTNAME", usuarioBuscado)
                     document.getElementById('busqueda').value = ''
@@ -69,22 +69,22 @@ function iniciarBusqueda(usuarioBuscado){
     /*aca limpiamos el campo*/
 }
 
-function capitalize(string){
+function capitalize(string) {
     string = string[0].toUpperCase() + string.slice(1);
     return string;
-  }
+}
 
 function logKey() {
     const clave = document.getElementById('passwordregister')
     const clave2 = document.getElementById('passwordconfirm')
 
     const texto = document.getElementById('create_page')
-    if (clave.value == clave2.value){
+    if (clave.value == clave2.value) {
         texto.style.background = 'linear-gradient(to bottom, rgb(18 255 5 / 91%) 0%, rgb(26 138 24 / 92%) 100%)';
         texto.value = 'Crear Cuenta!'
     } else {
         texto.style.background = 'linear-gradient(to bottom, rgb(255 5 5 / 91%) 0%, rgb(138 24 24 / 92%) 100%)';
         texto.value = 'Las claves no coinciden!'
     }
-    
+
 }

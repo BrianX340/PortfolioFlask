@@ -347,6 +347,7 @@ body {
 #header form {
     margin-top: 15px;
     float: right;
+    display: flex;
 }
 
 #header form li {

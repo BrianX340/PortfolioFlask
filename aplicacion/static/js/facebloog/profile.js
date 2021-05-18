@@ -4,7 +4,7 @@ window.onload = () => {
 
 }
 
-function capitalize(string){
+function capitalize(string) {
     string = string[0].toUpperCase() + string.slice(1);
     return string;
 }
@@ -19,22 +19,22 @@ function recivir_profile() {
     };
 
     fetch(`${window.origin}/consulta-profile`,
-    {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
+        {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
         })
-    })
         .then(function (response) {
 
             if (response.status !== 200) {
                 console.log(`Looks like there was a problem. Status code: ${response.status}`);
                 return;
             }
-            
+
             response.json().then(function (data) {
                 /*aca tomamos toda la informaciond del usuario y los introducimos en el document*/
                 document.getElementById('name').innerHTML = capitalize(data['name'])
@@ -43,17 +43,17 @@ function recivir_profile() {
                 document.getElementById('cantpost').innerHTML = data['posts']
                 document.getElementById('cantcoment').innerHTML = data['coments']
                 console.log(data)
-                if (data['profile_photo'] != 'none'){
+                if (data['profile_photo'] != 'none') {
                     let perfil_foto = data['profile_photo']
                     let imagen_html = document.getElementById('profile-image')
                     imagen_html.style.backgroundImage = `url(${window.origin}/downloader/${perfil_foto})`;
-                }else{
+                } else {
                     document.getElementById('profile-image').style.display = 'none'
                     document.getElementById('formuploadphoto').style.display = 'flex'
                 }
+            })
+                .catch(function (error) {
+                    console.log("Fetch error: " + error);
+                });
         })
-        .catch(function (error) {
-            console.log("Fetch error: " + error);
-        });
-    })
 }

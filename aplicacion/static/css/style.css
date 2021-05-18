@@ -1,11 +1,4 @@
-/* Variables */
-/*:root {
-  --main-color: #ffffff;
-  --primary-color: #c4c4c4;
-  --secondary-color: #f9f9f9;
-}*/
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -13,8 +6,8 @@
 }
 
 /* Main styling */
-body,
-html {
+
+body, html {
   font-family: 'Raleway', sans-serif;
   color: #4d4d4d;
   line-height: 1.7em;
@@ -73,6 +66,7 @@ hr {
 }
 
 /* Utility Classes */
+
 .container {
   margin: auto;
   max-width: 1100px;
@@ -81,7 +75,7 @@ hr {
 }
 
 .btn {
-  display: inline-block;  
+  display: inline-block;
   font-size: 1.125em;
   padding: 13px 20px;
   border: none;
@@ -104,17 +98,18 @@ hr {
 }
 
 /* Navbar */
+
 #navbar {
   overflow: auto;
 }
 
-#navbar .logo{
+#navbar .logo {
   text-align: center;
   float: left;
   padding-top: 20px;
 }
 
-#navbar ul{
+#navbar ul {
   list-style: none;
   float: right;
 }
@@ -129,7 +124,7 @@ hr {
   text-align: center;
 }
 
-#navbar ul li a:hover{
+#navbar ul li a:hover {
   background: orange;
 }
 
@@ -142,10 +137,10 @@ hr {
   justify-content: center;
 }
 
-
 /* Showcase */
+
 #showcase-home {
-  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../img/back.jpg");
+  background-image: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("../img/back.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -158,8 +153,7 @@ hr {
   padding: 50px;
 }
 
-#showcase .showcase-banner,
-#showcase-home .showcase-banner{
+#showcase .showcase-banner, #showcase-home .showcase-banner {
   background-color: #ffffff;
   height: 100%;
   width: 60%;
@@ -172,14 +166,12 @@ hr {
   opacity: 0.9;
 }
 
-#showcase h1,
-#showcase-home h1 {
+#showcase h1, #showcase-home h1 {
   padding: 30px;
 }
 
-
-
 /* Portfolio */
+
 #portfolio {
   text-align: center;
   padding-top: 30px;
@@ -193,7 +185,7 @@ hr {
   padding-bottom: 20px;
 }
 
-#portfolio ul{
+#portfolio ul {
   list-style: none;
   float: right;
 }
@@ -217,34 +209,32 @@ hr {
 .box {
   float: left;
   width: 20%;
-  padding:10px;
+  padding: 10px;
 }
-
 
 .box img {
   width: 100%;
 }
 
-.box a:hover img{
-  transform: scale(1.1); 
+.box a:hover img {
+  transform: scale(1.1);
 }
 
 /* Single Project */
+
 .single-project {
   padding-top: 30px;
   padding-bottom: 100px;
 }
 
-.single-project img{
+.single-project img {
   padding-bottom: 20px;
-
 }
-
 
 .box-portfolio {
   float: left;
   width: 50%;
-  padding:20px;
+  padding: 20px;
 }
 
 .box-portfolio p {
@@ -260,12 +250,12 @@ hr {
   padding-bottom: 20px;
 }
 
-.single-project .single-project-btn .prev{
+.single-project .single-project-btn .prev {
   padding-top: 20px;
   float: left;
 }
 
-.single-project .single-project-btn .next{
+.single-project .single-project-btn .next {
   padding-top: 20px;
   float: right;
 }
@@ -275,22 +265,20 @@ hr {
   height: 1px;
   float: none;
 }
+
 .single-project .hr-small-2 {
   background: #c4c4c4;
   height: 1px;
   margin-top: 95px;
 }
 
-
-
 /* Contact */
+
 #contact {
   height: 700px;
-  padding-top: 50px; 
-  padding-bottom: 100px; 
+  padding-top: 50px;
+  padding-bottom: 100px;
 }
-
-
 
 #contact .box-contact-features {
   float: left;
@@ -306,18 +294,19 @@ hr {
   line-height: .8em;
 }
 
-#contact .features-contact .box-form{
+#contact .features-contact .box-form {
   float: left;
   width: 50%;
   padding: 60px 10px 20px 10px;
 }
 
-#contact .features-contact .box-form iframe{
+#contact .features-contact .box-form iframe {
   width: 100%;
   height: 400px;
 }
 
 /* Contact Form */
+
 #contact #contact-form .single-form {
   margin-bottom: 20px;
 }
@@ -327,8 +316,7 @@ hr {
   margin-bottom: 5px;
 }
 
-#contact-form input,
-#contact-form textarea {
+#contact-form input, #contact-form textarea {
   width: 100%;
   padding: 10px;
   border: 1px #ddd solid;
@@ -338,13 +326,13 @@ hr {
   height: 200px;
 }
 
-#contact-form input:focus,
-#contact-form textarea:focus {
+#contact-form input:focus, #contact-form textarea:focus {
   outline: none;
   border-color: var(--main-color);
 }
 
 /* Footer */
+
 #main-footer {
   height: 80px;
   padding-top: 20px;
@@ -373,8 +361,7 @@ hr {
   text-align: center;
 }
 
-
-#showcase-home, #showcase, #portfolio, #contact{
+#showcase-home, #showcase, #portfolio, #contact {
   box-shadow: 0px 0px 20px hsl(0, 0%, 20%);
 }
 
@@ -385,5 +372,3 @@ hr {
 .texto-en-enlace:hover {
   color: red;
 }
-
-

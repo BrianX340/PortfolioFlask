@@ -4,38 +4,30 @@
         height: 30px;
         bottom: 350px;
         font-size: 20px;
-      }
-
+    }
     #showcase {
         height: 22vh;
-        padding: 0px ;
+        padding: 0px;
     }
-
     #showcase .showcase-banner {
-        padding-top: 10px ;
+        padding-top: 10px;
         width: 90%;
     }
-    
-
-    .showcase  div{
-        padding-top: 0px ;
+    .showcase div {
+        padding-top: 0px;
     }
-
     #showcase h1 {
         font-size: 20px;
-        padding: 10px ;
+        padding: 10px;
     }
-
     #showcase p {
         font-size: 18px;
     }
 }
 
 @media only screen and (min-width: 600px) {
-
     #showcase h1 {
         font-size: 40px;
-        padding: 10px ;
+        padding: 10px;
     }
-
 }
