@@ -77,8 +77,7 @@
 }
 
 #profile-image {
-    background-image: url("");
-    background-size: 100%;
+    background-size: cover;
 }
 
 #formuploadphoto {
@@ -93,6 +92,8 @@
     background-color: #ffffffc4;
     display: none;
 }
+
+
 
 #formuploadphoto input:first-child {
     font-size: 12px;

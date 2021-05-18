@@ -26,8 +26,6 @@
 }
 
 .resultados div {
-    flex-direction: column;
-    width: 95%;
     background-color: #8282826e;
     min-height: 30px;
     display: flex;
@@ -36,9 +34,12 @@
     border-radius: 10px;
     margin-top: 10px;
     padding-bottom: 5px;
+    height: 100%;
+    width: 95%;
     border: 2px #000000d9 solid;
     font-size: 20px;
 }
+
 
 #titulo-resultados {
     width: 95%;
@@ -111,45 +112,26 @@
     padding-left: 10px;
 }
 
-.container .result {
-    background-color: #ffffffcc;
-    width: 95%;
-    margin-top: 10px;
-    text-align: initial;
-    display: flex;
-    align-items: baseline;
-}
-
-.container .result:last-child {
-    margin-bottom: 10px;
-}
-
-.container .result a {
-    margin-left: 15px;
-}
-
 .parent {
     padding-right: 15px;
     padding-left: 5px;
 }
  
-#usuarios div .result {
-    flex-direction: initial;
-}
-
-.result div:first-child{
-    width: 80%;
-    height: 100%;
-    align-items: flex-start;
-    border: none;
-    margin: 0;
-    padding: 0;
+.result div:first-child {
+    width: 54px;
+    height: 40px;
+    margin: 5px 0px 5px 10px;
+    border-radius: 60px;
+    display: flex;
+    background-size: cover;
 }
 
 .result div:last-child {
-    width: 20%;
-    height: 100%;
-    align-items: flex-start;
-    border: none;
-    margin: auto;
+    height: 40px;
+    margin: 5px 15px 5px 15px;
+    display: flex;
+}
+
+#usuarios {
+    flex-direction: column;
 }

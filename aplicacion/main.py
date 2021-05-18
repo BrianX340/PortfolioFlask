@@ -324,7 +324,8 @@ def iniciar_busqueda_usuarios():
 				usuario_objeto = {
 					'name': user.name,
 					'lastname': user.lastname,
-					'email': user.email
+					'email': user.email,
+					'imagename': user.profile_photo
 				}
 				usuarios[user.email] = usuario_objeto
 		if len(usuarios)>0:

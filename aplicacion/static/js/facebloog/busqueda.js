@@ -46,8 +46,8 @@ function iniciarBusqueda(usuarioBuscado){
                         let name = capitalize(data['usuarios'][usuario]['name'])
                         let lastname = capitalize(data['usuarios'][usuario]['lastname'])
                         let email = data['usuarios'][usuario]['email']
-
-                        let p1 = "<div><div class='result'><div><a href='#' >NAME LASTNAME</a><a>EMAIL</a></div><div><img src='{{ url_for('static', filename='img/profilephotos/USERPHOTO') }}'> alt=''></div></div></div>".replace('NAME', name).replace('LASTNAME', lastname).replace('EMAIL', email).replace('USERPHOTO', 'brian.jpg')
+                        let image_name = data['usuarios'][usuario]['imagename']
+                        let p1 = "<div class='result'><div style='background-image: url(WINDOWSORIGIN/downloader/URLIMG)'></div><div><a href='#' >NAME LASTNAME</a></div></div>".replace('NAME', name).replace('LASTNAME', lastname).replace('URLIMG', image_name).replace('WINDOWSORIGIN', window.origin)
 
                         bloque_codigo = bloque_codigo + p1
                         
