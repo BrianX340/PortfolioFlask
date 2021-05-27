@@ -151,42 +151,45 @@ def crear_facebloogcomments():
         res = make_response(jsonify({"message": "OK"}), 200)
         return res
 
+
 @app.route("/consulta-posteos", methods=["POST"])
 def consulta_posteos():
-	from aplicacion.models import User
-	from aplicacion.models import Post
-	from aplicacion.models import Comments
-	from aplicacion.login import getEmailUser
-	from aplicacion.login import is_login
+    from aplicacion.models import User
+    from aplicacion.models import Post
+    from aplicacion.models import Comments
+    from aplicacion.login import getEmailUser
+    from aplicacion.login import is_login
 
-	if is_login():
-		email = getEmailUser()
-		user = User.query.filter_by(email=email).first()
-		posts = Post.query.filter_by(email=email).order_by(Post.fecha.desc()).all()
-		posteos = {}
+    if is_login():
+        email = getEmailUser()
+        user = User.query.filter_by(email=email).first()
+        posts = Post.query.filter_by(
+            email=email).order_by(Post.fecha.desc()).all()
+        posteos = {}
 
-		for post in posts:
-			lista_comentarios = Comments.query.filter_by(post_id=post.id).order_by(Comments.created.desc()).all()
-			comentarios = {}
-			post_echo = {}	
-			post_echo['useremail'] = post.email
-			post_echo['postid'] = post.id
-			post_echo['texto'] = post.texto
+        for post in posts:
+            lista_comentarios = Comments.query.filter_by(
+                post_id=post.id).order_by(Comments.created.desc()).all()
+            comentarios = {}
+            post_echo = {}
+            post_echo['useremail'] = post.email
+            post_echo['postid'] = post.id
+            post_echo['texto'] = post.texto
 
-			if lista_comentarios != []:
-				for comentario in lista_comentarios:
-					comentarios[comentario.id] = {	'content':comentario.content,
-													'user_comented':comentario.email_id,
-													'coment_id':comentario.id
-													}
-			post_echo['coments'] = comentarios
-			posteos[post.id] = post_echo
+            if lista_comentarios != []:
+                for comentario in lista_comentarios:
+                    comentarios[comentario.id] = {	'content': comentario.content,
+                                                   'user_comented': comentario.email_id,
+                                                   'coment_id': comentario.id
+                                                   }
+            post_echo['coments'] = comentarios
+            posteos[post.id] = post_echo
 
-		bloqueEcho = ''
-		bloqueEchoDerecho = []
-		for post_echo in posteos:
-			id_posteo = str(posteos[post_echo]['postid'])
-			bloquePost = f"""
+        bloqueEcho = ''
+        bloqueEchoDerecho = []
+        for post_echo in posteos:
+            id_posteo = str(posteos[post_echo]['postid'])
+            bloquePost = f"""
                         <div class='card'>
                             <div class='card-top'>
                                 <h4>{ posteos[post_echo]['useremail'] }</h4>
@@ -201,9 +204,9 @@ def consulta_posteos():
                             <div class='reactions'>
                             </div>
                     	"""
-			bloqueComentarioCompleto = []
-			for comentario in posteos[post_echo]['coments']:
-				comentario_echo = f"""
+            bloqueComentarioCompleto = []
+            for comentario in posteos[post_echo]['coments']:
+                comentario_echo = f"""
 				<div class='contenedorComentarios'>
 					<div>
 						<div>
@@ -214,11 +217,11 @@ def consulta_posteos():
 				</div>
 
 				"""
-				bloqueComentarioCompleto.append(comentario_echo)
-			bloqueComentarioCompleto = bloqueComentarioCompleto[::-1]
-			bloqueComentarioCompleto = ' '.join(bloqueComentarioCompleto)
-			bloquePost += bloqueComentarioCompleto
-			bloquePost += f"""
+                bloqueComentarioCompleto.append(comentario_echo)
+            bloqueComentarioCompleto = bloqueComentarioCompleto[::-1]
+            bloqueComentarioCompleto = ' '.join(bloqueComentarioCompleto)
+            bloquePost += bloqueComentarioCompleto
+            bloquePost += f"""
 				<div class='contenedorTexto'>
 					<div>
 						<span class='span-text-input'>
@@ -230,14 +233,17 @@ def consulta_posteos():
 				</div>
 				</div>
 			"""
-			bloqueEcho += bloquePost
+            bloqueEcho += bloquePost
 
-		res = make_response(jsonify({'bloque': bloqueEcho,'imagename':user.profile_photo}), 200)
-		return res
+        res = make_response(
+            jsonify({'bloque': bloqueEcho, 'imagename': user.profile_photo}), 200)
+        return res
+
 
 @app.route("/facebloog-register")
 def facebloog_create_account_mobile():
     return render_template('facebloog-index-mobile-register.html')
+
 
 @app.route("/facebloog", methods=["POST"])
 def crear_usuario_facebloog_mobile():
@@ -261,6 +267,7 @@ def crear_usuario_facebloog_mobile():
         db.session.add(userProfile)
         db.session.commit()
         return render_template('facebloog-index.html', email=email)
+
 
 @app.route("/facebloog", methods=["POST"])
 def registrar_usuario_facebloog():
@@ -308,6 +315,7 @@ def verificar_usuario_facebloog_mobile():
 def busqueda():
     return render_template('facebloog-busqueda.html')
 
+
 @app.route("/iniciar-busqueda", methods=["POST"])
 def iniciar_busqueda_usuarios():
     from aplicacion.models import User
@@ -337,29 +345,36 @@ def iniciar_busqueda_usuarios():
 
 ################################################################   Principal  ################################################################
 
+
 @app.route("/")
 def index():
     return render_template('index.html')
+
 
 @app.route("/html-css")
 def html_css():
     return render_template('1-HTML-CSS.html')
 
+
 @app.route("/contact")
 def contact():
     return render_template('contact.html')
+
 
 @app.route("/habilidades")
 def habilidades():
     return render_template('4-habilidades.html')
 
+
 @app.route("/cursos")
 def cursos():
     return render_template('5-cursos.html')
 
+
 @app.route("/acerca-de-mi")
 def acerca_de_mi():
     return render_template('6-acerca-de-mi.html')
+
 
 @app.route("/cv")
 def cv():
@@ -377,6 +392,7 @@ def facebloog():
     else:
         return render_template('facebloog-index.html')
 
+
 @app.route("/facebloog/mobile")
 def facebloog_mobile():
     from aplicacion.login import is_login
@@ -385,6 +401,7 @@ def facebloog_mobile():
         return render_template('facebloog-inicio.html')
     else:
         return render_template('facebloog-index-mobile.html')
+
 
 @app.route("/facebloog-perfil")
 def facebloog_perfil():
@@ -398,11 +415,12 @@ def facebloog_perfil():
     else:
         return redirect('facebloog')
 
+
 @app.route("/verificar-usuario", methods=["GET", "POST"])
 def verificar_usuario_facebloog():
     from aplicacion.models import User
     from aplicacion.login import login_user
-    
+
     email = request.form.get("email_login")
     clave = request.form.get("password_login")
     user = User.query.filter_by(email=email).first()

@@ -179,7 +179,8 @@
     vertical-align: middle;
     width: 95%;
     height: 95%;
-    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
   }
   #showcase-home {
     display: flex;
