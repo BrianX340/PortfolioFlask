@@ -1,22 +1,10 @@
 
-
-
-
-
-
-
-
-
 window.onload = () => {
-
-
-
     if (screen.width <= 500) {
         window.location = window.location['href'] + '/mobile';
     } else {
         document.getElementById('body').style.display = 'block';
     }
-
 
     document.addEventListener('keyup', logKey);
 
@@ -27,8 +15,6 @@ window.onload = () => {
     }
 
 }
-
-
 
 function logKey() {
     const clave = document.getElementById('passwordregister')

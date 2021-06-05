@@ -303,6 +303,7 @@ def verificar_usuario_facebloog_mobile():
     email = [x.lower() for x in email]
     email = ''.join(email)
     clave = request.form.get("password")
+    print(clave)
     user = User.query.filter_by(email=email).first()
     correcto = user.verify_password(clave)
     if correcto:

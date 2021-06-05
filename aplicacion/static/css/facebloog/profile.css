@@ -4,6 +4,13 @@
     height: 100%;
 }
 
+.post-header li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 #profile-section .card {
     background-color: #2118ff33;
     margin: 30px auto 30px auto;
@@ -138,12 +145,7 @@
     #header #sitename a {
         font-size: 18px;
     }
-    .post-header li a {
-        color: white;
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: 500;
-    }
+
     #header #sitename {
         width: 25%;
         padding-left: 27px;
