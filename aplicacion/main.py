@@ -27,6 +27,8 @@ def upload_profile_photo():
     return render_template('formulario.html')
 
 
+
+
 @app.route("/uploader", methods=['POST'])
 def uploader():
     from aplicacion.login import getEmailUser
@@ -189,7 +191,7 @@ def consulta_posteos():
         bloqueEchoDerecho = []
         for post_echo in posteos:
             id_posteo = str(posteos[post_echo]['postid'])
-            bloquePost = f"""
+            bloquePost = "
                         <div class='card'>
                             <div class='card-top'>
                                 <h4>{ posteos[post_echo]['useremail'] }</h4>
@@ -203,7 +205,7 @@ def consulta_posteos():
                             </div>
                             <div class='reactions'>
                             </div>
-                    	"""
+                    	"
             bloqueComentarioCompleto = []
             for comentario in posteos[post_echo]['coments']:
                 comentario_echo = f"""
@@ -218,8 +220,9 @@ def consulta_posteos():
 
 				"""
                 bloqueComentarioCompleto.append(comentario_echo)
-            bloqueComentarioCompleto = bloqueComentarioCompleto[::-1]
-            bloqueComentarioCompleto = ' '.join(bloqueComentarioCompleto)
+
+
+            bloqueComentarioCompleto = bloqueComentarioCompleto.join()
             bloquePost += bloqueComentarioCompleto
             bloquePost += f"""
 				<div class='contenedorTexto'>
@@ -303,7 +306,6 @@ def verificar_usuario_facebloog_mobile():
     email = [x.lower() for x in email]
     email = ''.join(email)
     clave = request.form.get("password")
-    print(clave)
     user = User.query.filter_by(email=email).first()
     correcto = user.verify_password(clave)
     if correcto:
